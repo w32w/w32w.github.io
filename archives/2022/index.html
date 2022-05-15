@@ -382,5 +382,33 @@
   
 
 
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.18/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'z4GUV5WAteLX2MfCOiFK9b0G-MdYXbMMI',
+      appKey     : 'kECddPXPvYkfvSwoikPp3KaL',
+      placeholder: "你看见一团柔软的漆黑毛绒生物叼着不知道从哪里捡来的作文本，从墙角里渗透了出来，似乎是非常希望你留下些什么……（欢迎一切交流、意见、废话、单纯的路过和摸摸，那都会让我心情++，想要评论）",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
 </body>
 </html>
