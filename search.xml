@@ -107,15 +107,15 @@
 <h1 id="Linux平台串口数据接收"><a href="#Linux平台串口数据接收" class="headerlink" title="Linux平台串口数据接收"></a>Linux平台串口数据接收</h1><h2 id="一、-实验目的"><a href="#一、-实验目的" class="headerlink" title="一、   实验目的"></a>一、   实验目的</h2><p>1、熟练使用Linux下io函数read、write和epoll函数</p>
 <p>2、了解Linux设备文件机制</p>
 <p>3、熟练使用示波器识读UART波形</p>
-<h2 id="二、实验过程"><a href="#二、实验过程" class="headerlink" title="二、实验过程"></a>二、实验过程</h2><h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序"><a href="#1、按照3-3-1节说明，向STC单片计算机板下载程序" class="headerlink" title="1、按照3.3.1节说明，向STC单片计算机板下载程序"></a>1、按照3.3.1节说明，向STC单片计算机板下载程序</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/blogs/source/_posts/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
+<h2 id="二、实验过程"><a href="#二、实验过程" class="headerlink" title="二、实验过程"></a>二、实验过程</h2><h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序"><a href="#1、按照3-3-1节说明，向STC单片计算机板下载程序" class="headerlink" title="1、按照3.3.1节说明，向STC单片计算机板下载程序"></a>1、按照3.3.1节说明，向STC单片计算机板下载程序</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
 <p>安装驱动之后，连接上了板子，成功写入程序。</p>
-<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"><a href="#2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率" class="headerlink" title="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"></a>2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/blogs/source/_posts/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/blogs/source/_posts/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
+<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"><a href="#2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率" class="headerlink" title="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"></a>2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
 <p>连接示波器后，测量得大概的时间为26us，通过计算（1000000&#x2F;26）得出波特率为38,461.53846153846。</p>
 <p>查询标准波特率表，找到常用波特率中38400一项，确定波特率为38400.</p>
-<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"><a href="#3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改" class="headerlink" title="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"></a>3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/blogs/source/_posts/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
+<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"><a href="#3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改" class="headerlink" title="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"></a>3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
 <p>阅读并修改程序当中波特率为38400</p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/blogs/source/_posts/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
 <p>编译程序，将设备链接到虚拟机，使用超级用户权限执行，得到结果。</p>
 <h3 id="4、使用如下命令将序列号提交到本次实验服务器"><a href="#4、使用如下命令将序列号提交到本次实验服务器" class="headerlink" title="4、使用如下命令将序列号提交到本次实验服务器"></a>4、使用如下命令将序列号提交到本次实验服务器</h3><p>于是综合学号和序列号，发送</p>
 <blockquote>
@@ -130,6 +130,41 @@
       <tags>
         <tag>科目：电子测试平台与工具2</tag>
         <tag>体裁：技术文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「计算机系统」课程作业_四</title>
+    <url>/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/</url>
+    <content><![CDATA[<p>《深入理解计算机系统》的【第五章 优化程序性能】和【第六章 存储器层次结构】，部分作业</p>
+<span id="more"></span>
+
+<h3 id="1-论述题-深入理解计算机系统（2版）5-17"><a href="#1-论述题-深入理解计算机系统（2版）5-17" class="headerlink" title="1. (论述题) 深入理解计算机系统（2版）5.17"></a>1. (论述题) 深入理解计算机系统（2版）5.17</h3><p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193238835.png" alt="image-20220516193238835"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193318663.png" alt="image-20220516193318663"></p>
+<blockquote>
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193408307.png" class title="image-20220516193408307">
+</blockquote>
+<hr>
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516200530945.png" class title="image-20220516200530945">
+
+<hr>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">inner_517</span><span class="params">(vec_ptr x, vec_ptr y, <span class="type">data_t</span> *dest)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i, length=<span class="built_in">vec_length</span>(x);</span><br><span class="line">    <span class="type">int</span> limit=length<span class="number">-2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">data_t</span> *xdata, *ydata, sum0=<span class="number">0</span>, sum1=<span class="number">0</span>, sum2=<span class="number">0</span>;</span><br><span class="line">    xdata=<span class="built_in">get_vec_start</span>(x);</span><br><span class="line">    ydata=<span class="built_in">get_vec_start</span>(y);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//三路并行相加</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;limit; i+=<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        sum1+=xdata[i+<span class="number">1</span>]*ydata[i+<span class="number">1</span>];</span><br><span class="line">        sum2+=xdata[i+<span class="number">2</span>]*ydata[i+<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i&lt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    *dest=sum0+sum1+sum2;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2-论述题-深入理解计算机系统（2版）5-19"><a href="#2-论述题-深入理解计算机系统（2版）5-19" class="headerlink" title="2. (论述题) 深入理解计算机系统（2版）5.19"></a>2. (论述题) 深入理解计算机系统（2版）5.19</h3><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193441059.png" class title="image-20220516193441059">
+
+<h3 id="3-论述题-同上，6-42-6-44"><a href="#3-论述题-同上，6-42-6-44" class="headerlink" title="3. (论述题) 同上，6.42+6.44"></a>3. (论述题) 同上，6.42+6.44</h3><p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193510091.png" alt="image-20220516193510091"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193523815.png" alt="image-20220516193523815"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193549343.png" alt="image-20220516193549343"></p>
+<blockquote>
+<p>状态果然还是不好。勉强应付交上去了。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>计算机系统</category>
+      </categories>
+      <tags>
+        <tag>书籍：深入理解计算机系统</tag>
       </tags>
   </entry>
   <entry>
