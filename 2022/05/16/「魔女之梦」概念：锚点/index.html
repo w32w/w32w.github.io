@@ -30,8 +30,8 @@
 <meta property="article:published_time" content="2022-05-16T14:36:31.000Z">
 <meta property="article:modified_time" content="2022-05-20T10:41:16.554Z">
 <meta property="article:author" content="32w">
-<meta property="article:tag" content="相关性：现代">
 <meta property="article:tag" content="体裁：文章">
+<meta property="article:tag" content="相关性：现代">
 <meta property="article:tag" content="原创：世界观">
 <meta name="twitter:card" content="summary">
 
@@ -237,13 +237,11 @@
       
         <p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
 <span id="more"></span>
-
 <hr>
 <p>我感到一阵眩晕。那是眩晕，还是一瞬间的错愕？面包店员烟消云消，而我手里提着的椰蓉餐包尚还发出阵阵香味。</p>
 <p>在楼道间窗户的前面，杂物之间，站着一位女性，她注视着我。</p>
 <p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
 <br>
-
 <p>“那是什么？”我不由自主地踉跄着往前走了几步，抓紧了面包袋子。</p>
 <p>我认得她，尽管这让我感到困惑。</p>
 <p>“你活动的中心。在扭曲之时将会动态回归的地方。对你来讲，是这大厦的楼梯口。”</p>
@@ -262,7 +260,6 @@
 <p>“嗯哼。”</p>
 <p>她没有再多说一个字，而是看向窗外，半边脸映在光里。沉默的空白在我们之间弥散开，我看着她的脸，或多或少为自己的熟悉感而迷茫。</p>
 <br>
-
 <p>“……所以，你是谁？”</p>
 <p>“啊，”她轻轻地呼了一声，并不显得惊讶，“许狮蛇。”</p>
 <p>“我——我认识你吗？”</p>
@@ -277,8 +274,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%9B%B8%E5%85%B3%E6%80%A7%EF%BC%9A%E7%8E%B0%E4%BB%A3/" rel="tag"># 相关性：现代</a>
               <a href="/tags/%E4%BD%93%E8%A3%81%EF%BC%9A%E6%96%87%E7%AB%A0/" rel="tag"># 体裁：文章</a>
+              <a href="/tags/%E7%9B%B8%E5%85%B3%E6%80%A7%EF%BC%9A%E7%8E%B0%E4%BB%A3/" rel="tag"># 相关性：现代</a>
               <a href="/tags/%E5%8E%9F%E5%88%9B%EF%BC%9A%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag"># 原创：世界观</a>
           </div>
 
@@ -367,7 +364,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -380,14 +377,14 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://lilyblack0930.github.io/" title="兔兔实验室 → https:&#x2F;&#x2F;lilyblack0930.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa-solid fa-flask fa-fw"></i>兔兔实验室</a>
+        <a href="https://lilyblack0930.github.io/" title="兔兔实验室 → https:&#x2F;&#x2F;lilyblack0930.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa fa-comment fa-fw"></i>兔兔实验室</a>
       </span>
   </div>
 
@@ -464,6 +461,26 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
@@ -477,7 +494,7 @@
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.18/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick（默认为Anonymous）,mail（可补充）,link（可补充）';
+    var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
