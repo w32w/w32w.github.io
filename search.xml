@@ -8,6 +8,25 @@
 ]]></content>
   </entry>
   <entry>
+    <title>「coc：log」神经病Log_ver.猴</title>
+    <url>/2022/05/20/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E7%A5%9E%E7%BB%8F%E7%97%85Log-ver-%E7%8C%B4/</url>
+    <content><![CDATA[<p>一个并不是克苏鲁神话的、由一篇恐怖意大利面改编而成，使用coc规则的跑团记录</p>
+<span id="more"></span>
+
+<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/insane.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>trpg</category>
+        <category>coc</category>
+      </categories>
+      <tags>
+        <tag>coc：log</tag>
+        <tag>coc模组：*神经病</tag>
+        <tag>相关性：现代</tag>
+        <tag>体裁：pdf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「Hexo」pdf</title>
     <url>/2022/05/21/%E3%80%8CHexo%E3%80%8Dpdf/</url>
     <content><![CDATA[<p>常规手法失效的前提下，在博客上显示pdf。笨办法。</p>
@@ -92,6 +111,40 @@
       </tags>
   </entry>
   <entry>
+    <title>「电子测试平台与工具2」计算机串口使用和测量</title>
+    <url>/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/</url>
+    <content><![CDATA[<p>普通的计算机串口使用和测量实验报告</p>
+<span id="more"></span>
+
+<h1 id="Linux平台串口数据接收"><a href="#Linux平台串口数据接收" class="headerlink" title="Linux平台串口数据接收"></a>Linux平台串口数据接收</h1><h2 id="一、-实验目的"><a href="#一、-实验目的" class="headerlink" title="一、   实验目的"></a>一、   实验目的</h2><p>1、熟练使用Linux下io函数read、write和epoll函数</p>
+<p>2、了解Linux设备文件机制</p>
+<p>3、熟练使用示波器识读UART波形</p>
+<h2 id="二、实验过程"><a href="#二、实验过程" class="headerlink" title="二、实验过程"></a>二、实验过程</h2><h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序"><a href="#1、按照3-3-1节说明，向STC单片计算机板下载程序" class="headerlink" title="1、按照3.3.1节说明，向STC单片计算机板下载程序"></a>1、按照3.3.1节说明，向STC单片计算机板下载程序</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
+<p>安装驱动之后，连接上了板子，成功写入程序。</p>
+<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"><a href="#2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率" class="headerlink" title="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"></a>2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
+<p>连接示波器后，测量得大概的时间为26us，通过计算（1000000&#x2F;26）得出波特率为38,461.53846153846。</p>
+<p>查询标准波特率表，找到常用波特率中38400一项，确定波特率为38400.</p>
+<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"><a href="#3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改" class="headerlink" title="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"></a>3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
+<p>阅读并修改程序当中波特率为38400</p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
+<p>编译程序，将设备链接到虚拟机，使用超级用户权限执行，得到结果。</p>
+<h3 id="4、使用如下命令将序列号提交到本次实验服务器"><a href="#4、使用如下命令将序列号提交到本次实验服务器" class="headerlink" title="4、使用如下命令将序列号提交到本次实验服务器"></a>4、使用如下命令将序列号提交到本次实验服务器</h3><p>于是综合学号和序列号，发送</p>
+<blockquote>
+<p>curl”132.232.98.70:6363&#x2F;checkBaud?id&#x3D;[         ]&amp;v&#x3D;c27f3439161361692a55fb”</p>
+</blockquote>
+<p>得到OK</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>电子测试平台与工具2</category>
+      </categories>
+      <tags>
+        <tag>体裁：技术文章</tag>
+        <tag>科目：电子测试平台与工具2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「独立游戏」夏日回响</title>
     <url>/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/</url>
     <content><![CDATA[<p>去年担任策划和美术（我也不知道怎么回事但就是这样）和队友们参加校内西山居比赛的作品，很喜欢的点子，可惜受限于时间没能完全呈现出来。</p>
@@ -135,104 +188,8 @@
         <category>独立游戏</category>
       </categories>
       <tags>
+        <tag>相关性：现代</tag>
         <tag>体裁：游戏发布</tag>
-        <tag>相关性：现代</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「coc：log」神经病Log_ver.猴</title>
-    <url>/2022/05/20/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E7%A5%9E%E7%BB%8F%E7%97%85Log-ver-%E7%8C%B4/</url>
-    <content><![CDATA[<p>一个并不是克苏鲁神话的、由一篇恐怖意大利面改编而成，使用coc规则的跑团记录</p>
-<span id="more"></span>
-
-<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/insane.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>trpg</category>
-        <category>coc</category>
-      </categories>
-      <tags>
-        <tag>相关性：现代</tag>
-        <tag>coc：log</tag>
-        <tag>coc模组：*神经病</tag>
-        <tag>体裁：pdf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「电子测试平台与工具2」计算机串口使用和测量</title>
-    <url>/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/</url>
-    <content><![CDATA[<p>普通的计算机串口使用和测量实验报告</p>
-<span id="more"></span>
-
-<h1 id="Linux平台串口数据接收"><a href="#Linux平台串口数据接收" class="headerlink" title="Linux平台串口数据接收"></a>Linux平台串口数据接收</h1><h2 id="一、-实验目的"><a href="#一、-实验目的" class="headerlink" title="一、   实验目的"></a>一、   实验目的</h2><p>1、熟练使用Linux下io函数read、write和epoll函数</p>
-<p>2、了解Linux设备文件机制</p>
-<p>3、熟练使用示波器识读UART波形</p>
-<h2 id="二、实验过程"><a href="#二、实验过程" class="headerlink" title="二、实验过程"></a>二、实验过程</h2><h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序"><a href="#1、按照3-3-1节说明，向STC单片计算机板下载程序" class="headerlink" title="1、按照3.3.1节说明，向STC单片计算机板下载程序"></a>1、按照3.3.1节说明，向STC单片计算机板下载程序</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
-<p>安装驱动之后，连接上了板子，成功写入程序。</p>
-<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"><a href="#2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率" class="headerlink" title="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"></a>2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
-<p>连接示波器后，测量得大概的时间为26us，通过计算（1000000&#x2F;26）得出波特率为38,461.53846153846。</p>
-<p>查询标准波特率表，找到常用波特率中38400一项，确定波特率为38400.</p>
-<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"><a href="#3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改" class="headerlink" title="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"></a>3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
-<p>阅读并修改程序当中波特率为38400</p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
-<p>编译程序，将设备链接到虚拟机，使用超级用户权限执行，得到结果。</p>
-<h3 id="4、使用如下命令将序列号提交到本次实验服务器"><a href="#4、使用如下命令将序列号提交到本次实验服务器" class="headerlink" title="4、使用如下命令将序列号提交到本次实验服务器"></a>4、使用如下命令将序列号提交到本次实验服务器</h3><p>于是综合学号和序列号，发送</p>
-<blockquote>
-<p>curl”132.232.98.70:6363&#x2F;checkBaud?id&#x3D;[         ]&amp;v&#x3D;c27f3439161361692a55fb”</p>
-</blockquote>
-<p>得到OK</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>电子测试平台与工具2</category>
-      </categories>
-      <tags>
-        <tag>体裁：技术文章</tag>
-        <tag>科目：电子测试平台与工具2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「阅读相关-电子书」在Windows和Android系统下Epub下载、格式转换、制作和阅读的资源汇总</title>
-    <url>/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</url>
-    <content><![CDATA[<p>现在用以看书的时间渐少，kobo h2o屏幕也坏了。多多少少也怀念着以前折腾 epub 、折腾 kobo 系统（准确来讲是被折腾）然后摸鱼读书的高中时光。</p>
-<p>这里做一些资源汇总的书签和指路，以慰电纸书的在天之灵。<em>谢谢你的陪伴，晚安(  ߹꒳߹ )</em></p>
-<span id="more"></span>
-
-<!-- toc -->
-
-<h1 id="下载资源"><a href="#下载资源" class="headerlink" title="下载资源"></a>下载资源</h1><p>「1」<a href="https://www.shuxiangjia.cn/">书享家 - 电子书下载导航</a></p>
-<p>极其恐怖地收集了相当多的网站，不过质量、稳定程度和收费程度不定。如果有时间，可以进去慢慢淘。</p>
-<p>「2」<a href="https://1lib.limited/">Zlibrary</a></p>
-<p>大名鼎鼎，好用，但是现在似乎被墙了。对一些比较冷门的中文书籍搜索没那么擅长，但也不错。</p>
-<p>「3」<a href="https://ebook2.lorefree.com/">LoreFree - 去中心化免费电子书共享社区</a></p>
-<p>个人比较常用，简单全面低门槛，不需要注册。缺点是由于来源不一，书的制作质量也良莠不齐。</p>
-<hr>
-<p>下载资源的网站某种程度上都挺艰难的，心怀感恩。当然，有条件还是要支持正版，获取方便不说，校对、格式一般也更好。</p>
-<h1 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h1><h2 id="在线"><a href="#在线" class="headerlink" title="在线"></a>在线</h2><p><a href="https://www.ofoct.com/ebooktool/zh/mobi-to-epubI">『小熊电子书转换工具』</a></p>
-<p>点击即用。简单，免费，速度算是快的。</p>
-<h2 id="本地（Windows）"><a href="#本地（Windows）" class="headerlink" title="本地（Windows）"></a>本地（Windows）</h2><p><a href="https://www.neat-reader.com/downloads/converter">『NeatConverter』</a></p>
-<p>界面如下：</p>
-<p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516125139401.png" alt="image-20220516125139401"></p>
-<p>简洁、轻量、无限制，成功率和速度都很高，并且还是免费的。十分推荐！</p>
-<h1 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h1><p><a href="https://sigil-ebook.com/">『Sigil』</a></p>
-<p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516124905944.png" alt="image-20220516124905944"></p>
-<p>虽然看上去界面复杂了一点，但实际上只要稍微学点正则，基础的操作如从txt导入、分章节、添加封面和作者等元数据，都十分简单（并且非常利于后期进行样式修改、应用、添加注释等进一步功能）。</p>
-<p>我之前有看到使用 epubstar 类似软件制作的 epub 电子书，表面上还不错，实际上打开之后会发现它的样式表和样式标签简直就是地狱般的复杂，能想象出制作者受的折磨。</p>
-<p>所以建议一开始就上手 sigil 类似软件，表面上的高门槛不一定高。</p>
-<h1 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h1><p>由于我之前一直是导入 kobo h2o 之后再阅读，电纸书坏了后则没什么时间读书了，所以这方面没有很多研究，处于一种凑合就行的状态。</p>
-<p>手机端我使用的是『掌阅』，随便找了个破解本地版，还行，就是导入不太好。据说如果愿意折腾一会的话，『静读天下』很好用。</p>
-<p>Windows系统下，使用的是『NeatReader』，免费版有一定限制。没错，和前面的格式转换就是同一家…… 总之这推广对我成功了✓</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>电子书</category>
-        <category>阅读</category>
-        <category>阅读相关</category>
-      </categories>
-      <tags>
-        <tag>体裁：技术文章</tag>
-        <tag>提及：Epub</tag>
       </tags>
   </entry>
   <entry>
@@ -291,6 +248,64 @@
       </tags>
   </entry>
   <entry>
+    <title>「阅读相关-电子书」在Windows和Android系统下Epub下载、格式转换、制作和阅读的资源汇总</title>
+    <url>/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<p>现在用以看书的时间渐少，kobo h2o屏幕也坏了。多多少少也怀念着以前折腾 epub 、折腾 kobo 系统（准确来讲是被折腾）然后摸鱼读书的高中时光。</p>
+<p>这里做一些资源汇总的书签和指路，以慰电纸书的在天之灵。<em>谢谢你的陪伴，晚安(  ߹꒳߹ )</em></p>
+<span id="more"></span>
+
+<!-- toc -->
+
+<h1 id="下载资源"><a href="#下载资源" class="headerlink" title="下载资源"></a>下载资源</h1><p>「1」<a href="https://www.shuxiangjia.cn/">书享家 - 电子书下载导航</a></p>
+<p>极其恐怖地收集了相当多的网站，不过质量、稳定程度和收费程度不定。如果有时间，可以进去慢慢淘。</p>
+<p>「2」<a href="https://1lib.limited/">Zlibrary</a></p>
+<p>大名鼎鼎，好用，但是现在似乎被墙了。对一些比较冷门的中文书籍搜索没那么擅长，但也不错。</p>
+<p>「3」<a href="https://ebook2.lorefree.com/">LoreFree - 去中心化免费电子书共享社区</a></p>
+<p>个人比较常用，简单全面低门槛，不需要注册。缺点是由于来源不一，书的制作质量也良莠不齐。</p>
+<hr>
+<p>下载资源的网站某种程度上都挺艰难的，心怀感恩。当然，有条件还是要支持正版，获取方便不说，校对、格式一般也更好。</p>
+<h1 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h1><h2 id="在线"><a href="#在线" class="headerlink" title="在线"></a>在线</h2><p><a href="https://www.ofoct.com/ebooktool/zh/mobi-to-epubI">『小熊电子书转换工具』</a></p>
+<p>点击即用。简单，免费，速度算是快的。</p>
+<h2 id="本地（Windows）"><a href="#本地（Windows）" class="headerlink" title="本地（Windows）"></a>本地（Windows）</h2><p><a href="https://www.neat-reader.com/downloads/converter">『NeatConverter』</a></p>
+<p>界面如下：</p>
+<p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516125139401.png" alt="image-20220516125139401"></p>
+<p>简洁、轻量、无限制，成功率和速度都很高，并且还是免费的。十分推荐！</p>
+<h1 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h1><p><a href="https://sigil-ebook.com/">『Sigil』</a></p>
+<p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516124905944.png" alt="image-20220516124905944"></p>
+<p>虽然看上去界面复杂了一点，但实际上只要稍微学点正则，基础的操作如从txt导入、分章节、添加封面和作者等元数据，都十分简单（并且非常利于后期进行样式修改、应用、添加注释等进一步功能）。</p>
+<p>我之前有看到使用 epubstar 类似软件制作的 epub 电子书，表面上还不错，实际上打开之后会发现它的样式表和样式标签简直就是地狱般的复杂，能想象出制作者受的折磨。</p>
+<p>所以建议一开始就上手 sigil 类似软件，表面上的高门槛不一定高。</p>
+<h1 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h1><p>由于我之前一直是导入 kobo h2o 之后再阅读，电纸书坏了后则没什么时间读书了，所以这方面没有很多研究，处于一种凑合就行的状态。</p>
+<p>手机端我使用的是『掌阅』，随便找了个破解本地版，还行，就是导入不太好。据说如果愿意折腾一会的话，『静读天下』很好用。</p>
+<p>Windows系统下，使用的是『NeatReader』，免费版有一定限制。没错，和前面的格式转换就是同一家…… 总之这推广对我成功了✓</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>电子书</category>
+        <category>阅读</category>
+        <category>阅读相关</category>
+      </categories>
+      <tags>
+        <tag>体裁：技术文章</tag>
+        <tag>提及：Epub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「魔女之梦」用以记录碎片点子的便签页</title>
+    <url>/2022/05/20/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E7%94%A8%E4%BB%A5%E8%AE%B0%E5%BD%95%E7%A2%8E%E7%89%87%E7%82%B9%E5%AD%90%E7%9A%84%E4%BE%BF%E7%AD%BE%E9%A1%B5/</url>
+    <content><![CDATA[<p>为什么在这里徘徊呢？你又遇见了什么破碎的梦呢？</p>
+]]></content>
+      <categories>
+        <category>原创</category>
+        <category>魔女之梦</category>
+      </categories>
+      <tags>
+        <tag>相关性：现代</tag>
+        <tag>体裁：便签页</tag>
+        <tag>原创：世界观</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「魔女之梦」概念：锚点</title>
     <url>/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%A6%82%E5%BF%B5%EF%BC%9A%E9%94%9A%E7%82%B9/</url>
     <content><![CDATA[<p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
@@ -332,24 +347,9 @@
         <category>魔女之梦</category>
       </categories>
       <tags>
+        <tag>相关性：现代</tag>
         <tag>体裁：文章</tag>
-        <tag>相关性：现代</tag>
         <tag>原创：世界观</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「魔女之梦」用以记录碎片点子的便签页</title>
-    <url>/2022/05/20/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E7%94%A8%E4%BB%A5%E8%AE%B0%E5%BD%95%E7%A2%8E%E7%89%87%E7%82%B9%E5%AD%90%E7%9A%84%E4%BE%BF%E7%AD%BE%E9%A1%B5/</url>
-    <content><![CDATA[<p>为什么在这里徘徊呢？你又遇见了什么破碎的梦呢？</p>
-]]></content>
-      <categories>
-        <category>原创</category>
-        <category>魔女之梦</category>
-      </categories>
-      <tags>
-        <tag>相关性：现代</tag>
-        <tag>原创：世界观</tag>
-        <tag>体裁：便签页</tag>
       </tags>
   </entry>
   <entry>
@@ -380,8 +380,8 @@
         <category>魔女之梦</category>
       </categories>
       <tags>
-        <tag>体裁：文章</tag>
         <tag>相关性：现代</tag>
+        <tag>体裁：文章</tag>
         <tag>原创：世界观</tag>
       </tags>
   </entry>
