@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>「Hexo」pdf-点击fireworks自定义颜色-valine评论失效pdf不显示等踩坑总结</title>
+    <url>/2022/05/21/%E3%80%8CHexo%E3%80%8Dpdf/</url>
+    <content><![CDATA[<p>常规手法失效的前提下，在博客上显示pdf。笨办法。</p>
+<span id="more"></span>
+
+<h1 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h1><p>为了存档跑团的log而想要显示pdf，不知道为什么，网上的方式对我而言都行不通……折腾了一会，选择了一种弯弯绕绕的方式</p>
+<h2 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h2><p><code>themes/next/config.yml</code> ，跟着一些网上教程，一步步修改下来</p>
+<h2 id="本地文件路径"><a href="#本地文件路径" class="headerlink" title="本地文件路径"></a>本地文件路径</h2><p>我放在了 <code>.\blogs\themes\next\source\lib\pdf\web</code> 下</p>
+<h2 id="引用pdf"><a href="#引用pdf" class="headerlink" title="引用pdf"></a>引用pdf</h2><p>搜索后发现上传的文件在 github 仓库里的 <code>w32w.github.io/lib/pdf/web/</code> 下，使用 <code>&#123;% pdf https://w32w.github.io/lib/pdf/web/insane.pdf %&#125;</code> ，可以正常显示。</p>
+<p>也可以使用 <code>&lt;object data=&quot;https://w32w.github.io/lib/pdf/web/insane.pdf&quot; type=&quot;application/pdf&quot; width=&quot;100%&quot; height=&quot;700px&quot;&gt;</code> ，可以自己调整高度，蛮不错（<a href="http://miracle778.site/pdf-test/pdf-test.html#more">参考</a>）</p>
+<p>示例：</p>
+<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/insane.pdf" data-height="700px"></div>
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>随便把pdf丢在一个地方上传</li>
+<li>去自己的仓库目录下，搜索这个Pdf，获取直链（以及显示规律）</li>
+<li>使用 <code>&#123;% pdf https://[...].pdf %&#125;</code> 或者 <code>&lt;object data=&quot;https://[...].pdf&quot; type=&quot;application/pdf&quot; width=&quot;100%&quot; height=&quot;700px&quot;&gt;</code> 来插入正文</li>
+</ul>
+<h1 id="点击fireworks自定义颜色"><a href="#点击fireworks自定义颜色" class="headerlink" title="点击fireworks自定义颜色"></a>点击fireworks自定义颜色</h1><p>先一步步跟着教程来，我使用 <code>fireworks.js</code> 的文件如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; origin, speed, color, angle, context &#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">origin</span> = origin</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span> = &#123; ...<span class="variable language_">this</span>.<span class="property">origin</span> &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">speed</span> = speed</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">angle</span> = angle</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCount</span> = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">fillStyle</span> = <span class="variable language_">this</span>.<span class="property">color</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">beginPath</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">arc</span>(<span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">fill</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span> = (<span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="variable language_">this</span>.<span class="property">angle</span>) * <span class="variable language_">this</span>.<span class="property">speed</span>) + <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> = (<span class="title class_">Math</span>.<span class="title function_">cos</span>(<span class="variable language_">this</span>.<span class="property">angle</span>) * <span class="variable language_">this</span>.<span class="property">speed</span>) + <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> + (<span class="variable language_">this</span>.<span class="property">renderCount</span> * <span class="number">0.3</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCount</span>++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Boom</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span> (&#123; origin, context, circleCount = <span class="number">16</span>, area &#125;) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">origin</span> = origin</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circleCount</span> = circleCount</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">area</span> = area</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">stop</span> = <span class="literal">false</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span> = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomArray</span>(<span class="params">range</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> length = range.<span class="property">length</span></span><br><span class="line">    <span class="keyword">const</span> randomIndex = <span class="title class_">Math</span>.<span class="title function_">floor</span>(length * <span class="title class_">Math</span>.<span class="title function_">random</span>())</span><br><span class="line">    <span class="keyword">return</span> range[randomIndex]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> range = [<span class="string">&quot;#99CCCC&quot;</span>, <span class="string">&quot;#FFCC99&quot;</span>, <span class="string">&quot;#FFCCCC&quot;</span>, <span class="string">&quot;#669999&quot;</span>, <span class="string">&quot;Eef1f6&quot;</span>, <span class="string">&quot;C1cfd0&quot;</span>, <span class="string">&quot;9ea09b&quot;</span>, <span class="string">&quot;D3bfb8&quot;</span>, <span class="string">&quot;Ead9d1&quot;</span>, <span class="string">&quot;F2f1ed&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">randomArray</span>(range)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//const range = [&#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;1&#x27;, &#x27;2&#x27;]</span></span><br><span class="line">    <span class="comment">//return &#x27;#&#x27; + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomRange</span>(<span class="params">start, end</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (end - start) * <span class="title class_">Math</span>.<span class="title function_">random</span>() + start</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">circleCount</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">const</span> circle = <span class="keyword">new</span> <span class="title class_">Circle</span>(&#123;</span><br><span class="line">        <span class="attr">context</span>: <span class="variable language_">this</span>.<span class="property">context</span>,</span><br><span class="line">        <span class="attr">origin</span>: <span class="variable language_">this</span>.<span class="property">origin</span>,</span><br><span class="line">        <span class="attr">color</span>: <span class="variable language_">this</span>.<span class="title function_">randomColor</span>(),</span><br><span class="line">        <span class="attr">angle</span>: <span class="variable language_">this</span>.<span class="title function_">randomRange</span>(<span class="title class_">Math</span>.<span class="property">PI</span> - <span class="number">1</span>, <span class="title class_">Math</span>.<span class="property">PI</span> + <span class="number">1</span>),</span><br><span class="line">        <span class="attr">speed</span>: <span class="variable language_">this</span>.<span class="title function_">randomRange</span>(<span class="number">1</span>, <span class="number">6</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">push</span>(circle)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">circle, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (circle.<span class="property">position</span>.<span class="property">x</span> &gt; <span class="variable language_">this</span>.<span class="property">area</span>.<span class="property">width</span> || circle.<span class="property">position</span>.<span class="property">y</span> &gt; <span class="variable language_">this</span>.<span class="property">area</span>.<span class="property">height</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      circle.<span class="title function_">move</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">circles</span>.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">stop</span> = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">circle</span> =&gt;</span> circle.<span class="title function_">draw</span>())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CursorSpecialEffects</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerCanvas</span> = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCanvas</span> = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerContext</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">globalWidth</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">globalHeight</span> = <span class="variable language_">window</span>.<span class="property">innerHeight</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span> = []</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handleMouseDown</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> boom = <span class="keyword">new</span> <span class="title class_">Boom</span>(&#123;</span><br><span class="line">      <span class="attr">origin</span>: &#123; <span class="attr">x</span>: e.<span class="property">clientX</span>, <span class="attr">y</span>: e.<span class="property">clientY</span> &#125;,</span><br><span class="line">      <span class="attr">context</span>: <span class="variable language_">this</span>.<span class="property">computerContext</span>,</span><br><span class="line">      <span class="attr">area</span>: &#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">this</span>.<span class="property">globalWidth</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="variable language_">this</span>.<span class="property">globalHeight</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    boom.<span class="title function_">init</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">push</span>(boom)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> || <span class="variable language_">this</span>.<span class="title function_">run</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handlePageHide</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span> = []</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> style = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">style</span></span><br><span class="line">    style.<span class="property">position</span> = <span class="string">&#x27;fixed&#x27;</span></span><br><span class="line">    style.<span class="property">top</span> = style.<span class="property">left</span> = <span class="number">0</span></span><br><span class="line">    style.<span class="property">zIndex</span> = <span class="string">&#x27;999999999999999999999999999999999999999999&#x27;</span></span><br><span class="line">    style.<span class="property">pointerEvents</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line"></span><br><span class="line">    style.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">globalWidth</span></span><br><span class="line">    style.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">globalHeight</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">renderCanvas</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousedown&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handleMouseDown</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;pagehide&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handlePageHide</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">booms</span>.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">requestAnimationFrame</span>(<span class="variable language_">this</span>.<span class="property">run</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerContext</span>.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span>.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">boom, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (boom.<span class="property">stop</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      boom.<span class="title function_">move</span>()</span><br><span class="line">      boom.<span class="title function_">draw</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span>.<span class="title function_">drawImage</span>(<span class="variable language_">this</span>.<span class="property">computerCanvas</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cursorSpecialEffects = <span class="keyword">new</span> <span class="title class_">CursorSpecialEffects</span>()</span><br><span class="line">cursorSpecialEffects.<span class="title function_">init</span>()</span><br></pre></td></tr></table></figure>
+
+<p>而这一段：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">randomColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> range = [<span class="string">&quot;#99CCCC&quot;</span>, <span class="string">&quot;#FFCC99&quot;</span>, <span class="string">&quot;#FFCCCC&quot;</span>, <span class="string">&quot;#669999&quot;</span>, <span class="string">&quot;Eef1f6&quot;</span>, <span class="string">&quot;C1cfd0&quot;</span>, <span class="string">&quot;9ea09b&quot;</span>, <span class="string">&quot;D3bfb8&quot;</span>, <span class="string">&quot;Ead9d1&quot;</span>, <span class="string">&quot;F2f1ed&quot;</span>]</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">randomArray</span>(range)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//const range = [&#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;1&#x27;, &#x27;2&#x27;]</span></span><br><span class="line">  <span class="comment">//return &#x27;#&#x27; + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是主管随机颜色的了。可以看到原本的 <code>fireworks.js</code> （注释部分）是随机生成颜色，如果要优化配色的话，自己直接使用自定义颜色代码的数组取代，再随即返回结果即可。</p>
+<h1 id="踩坑总结"><a href="#踩坑总结" class="headerlink" title="踩坑总结"></a>踩坑总结</h1><p>把根目录下 <code>_config.yml</code> 里</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">http://github.com/w32w/w32w.github.io.git</span>  <span class="comment">#你的仓库地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<p>仓库地址用 <strong>http</strong> 而非 https，有奇效</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>体裁：技术文章</tag>
+        <tag>提及：Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「coc：log」W列车Log_ver.猴_旅行者</title>
     <url>/2022/05/21/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8DW%E5%88%97%E8%BD%A6Log-ver-%E7%8C%B4-%E6%97%85%E8%A1%8C%E8%80%85/</url>
     <content><![CDATA[<blockquote>
 <p>这座 W 列车站很大，来来往往的人群在大厅里步履匆匆地走过。抬头望去，随处可见流光闪耀的【W】LOGO、各式不同滚动着的广告牌，整齐排列在两边的 W 列车全息投影广告词如同旗帜般从顶棚上垂下，标语泛着五彩的霓虹光芒：“节省时间，改变生活。”</p>
 </blockquote>
 <span id="more"></span>
+
 <div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/220521w.pdf" data-height="700px"></div>
-<p>非常考验kpu算力的模组……恐怖……！<br>
-设置并不全面，存在按头，但是我认为模组设置上还是很精彩的</p>
+
+<p> 非常考验kpu算力的模组……恐怖……！<br>设置并不全面，存在按头，但是我认为模组设置上还是很精彩的</p>
 ]]></content>
       <categories>
         <category>trpg</category>
@@ -23,23 +66,42 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/05/16/hello-world/</url>
-    <content><![CDATA[<p>你看向楼梯间的窗户，它的框架已经肮脏不堪，透过玻璃隐约可见窗外天色阴沉，似乎要下暴雨了。</p>
-<p>你曾经来过这里。</p>
+    <title>「coc：log」神经病Log_ver.双叶</title>
+    <url>/2022/05/21/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E7%A5%9E%E7%BB%8F%E7%97%85Log-ver-%E5%8F%8C%E5%8F%B6/</url>
+    <content><![CDATA[<blockquote>
+<p>你到达了一层，敲门声越发大了</p>
+<p>“社区服务！麻烦开下门。”</p>
+</blockquote>
+<span id="more"></span>
+
+<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/220521leafInsane.pdf" data-height="700px"></div>
+
+<p>最后一段的扮演非常喜欢，轮番敲门也非常喜欢。把想要的那种氛围带入了。</p>
 ]]></content>
+      <categories>
+        <category>trpg</category>
+        <category>coc</category>
+      </categories>
+      <tags>
+        <tag>coc：log</tag>
+        <tag>相关性：现代</tag>
+        <tag>体裁：pdf</tag>
+        <tag>coc模组：*神经病</tag>
+      </tags>
   </entry>
   <entry>
     <title>「coc：log」开端Log_ver.双叶_32w_Shelter</title>
     <url>/2022/05/21/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E5%BC%80%E7%AB%AFLog-ver-%E5%8F%8C%E5%8F%B6-32w-Shelter/</url>
     <content><![CDATA[<p>由《开端》改编而成的口胡团，只有一半的log，作存档用。</p>
 <blockquote>
-<p><strong>於翰秋</strong>	 “我还是想不通啊，他人又好，长的又帅，学习比我都好那么一点点……怎么就选择自己毕业前从楼上跳下去。”</p>
+<p><strong>於翰秋</strong>	 “我还是想不通啊，他人又好，长的又帅，学习比我都好那么一点点……怎么就选择自己毕业前从楼上跳下去。” </p>
 <p><strong>於翰秋</strong>	 “他什么时候过来的……？</p>
 </blockquote>
 <span id="more"></span>
+
 <p>迪老师！别看了！现在回头还来得及！</p>
 <div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/220521opening.pdf" data-height="700px"></div>
+
 <p>只有一半，因为后半段转面团了。</p>
 <p>【秦轩阮】🚗——【於翰秋】🏃‍——“没有你我可怎么活啊——”</p>
 ]]></content>
@@ -55,68 +117,11 @@
       </tags>
   </entry>
   <entry>
-    <title>「Hexo」pdf-点击fireworks自定义颜色-valine评论失效pdf不显示等踩坑总结</title>
-    <url>/2022/05/21/%E3%80%8CHexo%E3%80%8Dpdf/</url>
-    <content><![CDATA[<p>常规手法失效的前提下，在博客上显示pdf。笨办法。</p>
-<span id="more"></span>
-<h1>PDF</h1>
-<p>为了存档跑团的log而想要显示pdf，不知道为什么，网上的方式对我而言都行不通……折腾了一会，选择了一种弯弯绕绕的方式</p>
-<h2 id="Next主题配置">Next主题配置</h2>
-<p><code>themes/next/config.yml</code> ，跟着一些网上教程，一步步修改下来</p>
-<h2 id="本地文件路径">本地文件路径</h2>
-<p>我放在了 <code>.\blogs\themes\next\source\lib\pdf\web</code> 下</p>
-<h2 id="引用pdf">引用pdf</h2>
-<p>搜索后发现上传的文件在 github 仓库里的 <code>w32w.github.io/lib/pdf/web/</code> 下，使用 <code>&#123;% pdf https://w32w.github.io/lib/pdf/web/insane.pdf %&#125;</code> ，可以正常显示。</p>
-<p>也可以使用 <code>&lt;object data=&quot;https://w32w.github.io/lib/pdf/web/insane.pdf&quot; type=&quot;application/pdf&quot; width=&quot;100%&quot; height=&quot;700px&quot;&gt;</code> ，可以自己调整高度，蛮不错（<a href="http://miracle778.site/pdf-test/pdf-test.html#more">参考</a>）</p>
-<p>示例：</p>
-<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/insane.pdf" data-height="700px"></div>
-<h2 id="总结">总结</h2>
-<ul>
-<li>随便把pdf丢在一个地方上传</li>
-<li>去自己的仓库目录下，搜索这个Pdf，获取直链（以及显示规律）</li>
-<li>使用 <code>&#123;% pdf https://[...].pdf %&#125;</code> 或者 <code>&lt;object data=&quot;https://[...].pdf&quot; type=&quot;application/pdf&quot; width=&quot;100%&quot; height=&quot;700px&quot;&gt;</code> 来插入正文</li>
-</ul>
-<h1>点击fireworks自定义颜色</h1>
-<p>先一步步跟着教程来，我使用 <code>fireworks.js</code> 的文件如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; origin, speed, color, angle, context &#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">origin</span> = origin</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span> = &#123; ...<span class="variable language_">this</span>.<span class="property">origin</span> &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">speed</span> = speed</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">angle</span> = angle</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCount</span> = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">fillStyle</span> = <span class="variable language_">this</span>.<span class="property">color</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">beginPath</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">arc</span>(<span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span>.<span class="title function_">fill</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span> = (<span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="variable language_">this</span>.<span class="property">angle</span>) * <span class="variable language_">this</span>.<span class="property">speed</span>) + <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">x</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> = (<span class="title class_">Math</span>.<span class="title function_">cos</span>(<span class="variable language_">this</span>.<span class="property">angle</span>) * <span class="variable language_">this</span>.<span class="property">speed</span>) + <span class="variable language_">this</span>.<span class="property">position</span>.<span class="property">y</span> + (<span class="variable language_">this</span>.<span class="property">renderCount</span> * <span class="number">0.3</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCount</span>++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Boom</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span> (&#123; origin, context, circleCount = <span class="number">16</span>, area &#125;) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">origin</span> = origin</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circleCount</span> = circleCount</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">area</span> = area</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">stop</span> = <span class="literal">false</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span> = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomArray</span>(<span class="params">range</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> length = range.<span class="property">length</span></span><br><span class="line">    <span class="keyword">const</span> randomIndex = <span class="title class_">Math</span>.<span class="title function_">floor</span>(length * <span class="title class_">Math</span>.<span class="title function_">random</span>())</span><br><span class="line">    <span class="keyword">return</span> range[randomIndex]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> range = [<span class="string">&quot;#99CCCC&quot;</span>, <span class="string">&quot;#FFCC99&quot;</span>, <span class="string">&quot;#FFCCCC&quot;</span>, <span class="string">&quot;#669999&quot;</span>, <span class="string">&quot;Eef1f6&quot;</span>, <span class="string">&quot;C1cfd0&quot;</span>, <span class="string">&quot;9ea09b&quot;</span>, <span class="string">&quot;D3bfb8&quot;</span>, <span class="string">&quot;Ead9d1&quot;</span>, <span class="string">&quot;F2f1ed&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">randomArray</span>(range)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//const range = [&#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;1&#x27;, &#x27;2&#x27;]</span></span><br><span class="line">    <span class="comment">//return &#x27;#&#x27; + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">randomRange</span>(<span class="params">start, end</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (end - start) * <span class="title class_">Math</span>.<span class="title function_">random</span>() + start</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">circleCount</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">const</span> circle = <span class="keyword">new</span> <span class="title class_">Circle</span>(&#123;</span><br><span class="line">        <span class="attr">context</span>: <span class="variable language_">this</span>.<span class="property">context</span>,</span><br><span class="line">        <span class="attr">origin</span>: <span class="variable language_">this</span>.<span class="property">origin</span>,</span><br><span class="line">        <span class="attr">color</span>: <span class="variable language_">this</span>.<span class="title function_">randomColor</span>(),</span><br><span class="line">        <span class="attr">angle</span>: <span class="variable language_">this</span>.<span class="title function_">randomRange</span>(<span class="title class_">Math</span>.<span class="property">PI</span> - <span class="number">1</span>, <span class="title class_">Math</span>.<span class="property">PI</span> + <span class="number">1</span>),</span><br><span class="line">        <span class="attr">speed</span>: <span class="variable language_">this</span>.<span class="title function_">randomRange</span>(<span class="number">1</span>, <span class="number">6</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">push</span>(circle)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">circle, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (circle.<span class="property">position</span>.<span class="property">x</span> &gt; <span class="variable language_">this</span>.<span class="property">area</span>.<span class="property">width</span> || circle.<span class="property">position</span>.<span class="property">y</span> &gt; <span class="variable language_">this</span>.<span class="property">area</span>.<span class="property">height</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      circle.<span class="title function_">move</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">circles</span>.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">stop</span> = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">circles</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">circle</span> =&gt;</span> circle.<span class="title function_">draw</span>())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CursorSpecialEffects</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerCanvas</span> = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderCanvas</span> = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerContext</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">globalWidth</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">globalHeight</span> = <span class="variable language_">window</span>.<span class="property">innerHeight</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span> = []</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handleMouseDown</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> boom = <span class="keyword">new</span> <span class="title class_">Boom</span>(&#123;</span><br><span class="line">      <span class="attr">origin</span>: &#123; <span class="attr">x</span>: e.<span class="property">clientX</span>, <span class="attr">y</span>: e.<span class="property">clientY</span> &#125;,</span><br><span class="line">      <span class="attr">context</span>: <span class="variable language_">this</span>.<span class="property">computerContext</span>,</span><br><span class="line">      <span class="attr">area</span>: &#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">this</span>.<span class="property">globalWidth</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="variable language_">this</span>.<span class="property">globalHeight</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    boom.<span class="title function_">init</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">push</span>(boom)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> || <span class="variable language_">this</span>.<span class="title function_">run</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handlePageHide</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span> = []</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> style = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">style</span></span><br><span class="line">    style.<span class="property">position</span> = <span class="string">&#x27;fixed&#x27;</span></span><br><span class="line">    style.<span class="property">top</span> = style.<span class="property">left</span> = <span class="number">0</span></span><br><span class="line">    style.<span class="property">zIndex</span> = <span class="string">&#x27;999999999999999999999999999999999999999999&#x27;</span></span><br><span class="line">    style.<span class="property">pointerEvents</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line"></span><br><span class="line">    style.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="property">width</span> = <span class="variable language_">this</span>.<span class="property">globalWidth</span></span><br><span class="line">    style.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">renderCanvas</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">computerCanvas</span>.<span class="property">height</span> = <span class="variable language_">this</span>.<span class="property">globalHeight</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(<span class="variable language_">this</span>.<span class="property">renderCanvas</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousedown&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handleMouseDown</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;pagehide&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handlePageHide</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">booms</span>.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">running</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">requestAnimationFrame</span>(<span class="variable language_">this</span>.<span class="property">run</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>))</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">computerContext</span>.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span>.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">boom, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (boom.<span class="property">stop</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">booms</span>.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      boom.<span class="title function_">move</span>()</span><br><span class="line">      boom.<span class="title function_">draw</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">renderContext</span>.<span class="title function_">drawImage</span>(<span class="variable language_">this</span>.<span class="property">computerCanvas</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">globalWidth</span>, <span class="variable language_">this</span>.<span class="property">globalHeight</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cursorSpecialEffects = <span class="keyword">new</span> <span class="title class_">CursorSpecialEffects</span>()</span><br><span class="line">cursorSpecialEffects.<span class="title function_">init</span>()</span><br></pre></td></tr></table></figure>
-<p>而这一段：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">randomColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> range = [<span class="string">&quot;#99CCCC&quot;</span>, <span class="string">&quot;#FFCC99&quot;</span>, <span class="string">&quot;#FFCCCC&quot;</span>, <span class="string">&quot;#669999&quot;</span>, <span class="string">&quot;Eef1f6&quot;</span>, <span class="string">&quot;C1cfd0&quot;</span>, <span class="string">&quot;9ea09b&quot;</span>, <span class="string">&quot;D3bfb8&quot;</span>, <span class="string">&quot;Ead9d1&quot;</span>, <span class="string">&quot;F2f1ed&quot;</span>]</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">randomArray</span>(range)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//const range = [&#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;1&#x27;, &#x27;2&#x27;]</span></span><br><span class="line">  <span class="comment">//return &#x27;#&#x27; + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就是主管随机颜色的了。可以看到原本的 <code>fireworks.js</code> （注释部分）是随机生成颜色，如果要优化配色的话，自己直接使用自定义颜色代码的数组取代，再随即返回结果即可。</p>
-<h1>踩坑总结</h1>
-<p>把根目录下 <code>_config.yml</code> 里</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">http://github.com/w32w/w32w.github.io.git</span>  <span class="comment">#你的仓库地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<p>仓库地址用 <strong>http</strong> 而非 https，有奇效</p>
+    <title>Hello World</title>
+    <url>/2022/05/16/hello-world/</url>
+    <content><![CDATA[<p>你看向楼梯间的窗户，它的框架已经肮脏不堪，透过玻璃隐约可见窗外天色阴沉，似乎要下暴雨了。</p>
+<p>你曾经来过这里。</p>
 ]]></content>
-      <categories>
-        <category>技术</category>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>体裁：技术文章</tag>
-        <tag>提及：Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「coc：log」神经病Log_ver.双叶</title>
-    <url>/2022/05/21/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E7%A5%9E%E7%BB%8F%E7%97%85Log-ver-%E5%8F%8C%E5%8F%B6/</url>
-    <content><![CDATA[<blockquote>
-<p>你到达了一层，敲门声越发大了</p>
-<p>“社区服务！麻烦开下门。”</p>
-</blockquote>
-<span id="more"></span>
-<div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/220521leafInsane.pdf" data-height="700px"></div>
-<p>最后一段的扮演非常喜欢，轮番敲门也非常喜欢。把想要的那种氛围带入了。</p>
-]]></content>
-      <categories>
-        <category>trpg</category>
-        <category>coc</category>
-      </categories>
-      <tags>
-        <tag>coc：log</tag>
-        <tag>相关性：现代</tag>
-        <tag>体裁：pdf</tag>
-        <tag>coc模组：*神经病</tag>
-      </tags>
   </entry>
   <entry>
     <title>「coc：log」神经病Log_ver.猴</title>
@@ -126,7 +131,9 @@
 <p>每个人都没有回复，或者根本没有登录；你的即时消息无人回复，收到的最后一条短信是一个朋友说他从商店回来后会跟你聊天，但那是昨天的事了。</p>
 </blockquote>
 <span id="more"></span>
+
 <div class="pdfobject-container" data-target="https://w32w.github.io/lib/pdf/web/insane.pdf" data-height="700px"></div>
+
 <p>比起普通coc的探索-调查-推进结构，这个口胡团更像是作为恐怖片主角生存下来。反正气氛成功地渲染到了就好（趴）</p>
 <blockquote>
 <p>城市上空的阴云笼罩着漆黑的街道，远处十字路口的交通灯上黄灯闪烁，在城市的光辉映衬下变成紫色和黑色的朦胧的云块悬挂在天空。</p>
@@ -150,40 +157,41 @@
     <content><![CDATA[<p>火车站人人行迹匆匆，行人们在这萧瑟的秋日里裹紧自己的外套，借此以抵御寒风。阴郁而漫长的冬日就快要降临了，寒冷让这个提着大包小包的女人忍不住搓了搓手。</p>
 <p>并没有什么人多看她一眼。伊斯克拉带着自己的行李，从火车站转向地铁，再登上公交车。从右转了第三个街角之后，她看见了那栋她出生于此、在此度过了青春时代的楼房，那上面漆着的浅绿色墙漆让她徒生一股怀念之情。</p>
 <span id="more"></span>	
+
 <hr>
-<p></p>
+<p>　</p>
 <blockquote>
 <p>为《冰冷的死亡之手》pc所写的短文。时间大概在198_年，伊斯克拉·安德列娃·诺维科夫从阿富汗回到了莫斯科，在再次得到组织的征召之前过了半个月。她当时约29岁。</p>
 </blockquote>
-<p></p>
+<p>　</p>
 <p>这样，她从阿富汗回到了莫斯科。</p>
 <p>伊斯克拉·安德列娃·诺维科夫拉动自己的行李箱，从火车上走了下来，缓缓地走出了站。她的脚踝因为刚刚过大的动作而隐隐作痛，那是之前留下的老病根，就像墙角的青苔和开裂那样，无关痛痒，但是总让人厌烦。</p>
 <p>火车站人人行迹匆匆，行人们在这萧瑟的秋日里裹紧自己的外套，借此以抵御寒风。阴郁而漫长的冬日就快要降临了，寒冷让这个提着大包小包的女人忍不住搓了搓手。</p>
 <p>并没有什么人多看她一眼。伊斯克拉带着自己的行李，从火车站转向地铁，再登上公交车。从右转了第三个街角之后，她看见了那栋她出生于此、在此度过了青春时代的楼房，那上面漆着的浅绿色墙漆让她徒生一股怀念之情。</p>
 <p>她就这么回到了自己的家。</p>
-<p></p>
+<p>　</p>
 <p>第二天，父亲在她坐到桌边来吃早餐的时候看了她一眼。她的姐姐正坐在一旁，哄着自己的孩子，一遍又一遍地重复着，企图让这个名叫安东的小男孩吃进去东西。姐姐的丈夫坐在一旁，正在看报纸。</p>
 <p>早饭是牛奶冲泡的麦片，还有几片面包和果酱，包装放在桌子上。伊斯克拉坐下一边吃着早饭，一边转过头和父亲说话。</p>
 <p>”买到麦片了吗？“</p>
 <p>”最近不紧销。“</p>
 <p>吃完饭之后，她帮着父亲把餐具叠在一起，收进厨房去。</p>
 <p>她想给自己做个煎蛋吃，然而打开后才发现冰箱里没有鸡蛋。这之后她就出门了，四处绕了一圈，没有明确的目标。邮局没有她的信，她沿着莫斯科河的河岸往上游的方向走了一阵子，又去看了看自己的中学，那还是老样子，周围的建筑比以前显得旧了些，旁边栽种了新品种的树木。</p>
-<p></p>
+<p>　</p>
 <p>第五天的时候她正在为搬走而收拾自己的行李，她把一本本的书从柜子里取出，连带着少女时期她亲手所做的干花书签一起压在了底下。</p>
 <p>越是临近冬季，莫斯科的天气越是阴沉，连太阳都不怎么出。她在吃饭的时候抱怨了几句，姐姐随声附和。</p>
-<p></p>
+<p>　</p>
 <p>又过了几天，在她去邮局的路上，暴雨猛然地倾泻下来了。她被困在邮局当中，几个青少年在一旁欢声笑语地谈论他们的事情，这暴雨泥土和潮湿的气味让她脑海当中属于叶夫根尼的记忆鲜明了起来。</p>
 <p>叶夫根尼。叶夫根尼，在大多数时候显得英俊而快乐，简直不像是活在这充满暴晒和高温天气当中的人，而像是某种象征物一样。他像是活在一个和这时空平行的世界里，一个更加年轻、充满热情的革命精神的世界里，似乎他马上就要用自己这双手去握住锤子，去做些什么，去拼搏进取，又或者拿起管风琴，去度过自己欢声笑语的青春年华。</p>
 <p>但这是在阿富汗。因此骤雨落下，尘土变为泥沼，比起高温更为让人厌烦。所以他只是小心地把磁带放进录音机，嘴唇颤抖着，冲她露出一个颤抖着的微笑。在这场春季短暂而微弱的骤雨当中，摇滚的声音在雨幕中的帐篷里小声地流淌，这个时候他眨了眨自己的眼睛，对她说：</p>
 <p>“听一听吧，伊斯克拉……这歌多好啊。”</p>
-<p></p>
+<p>　</p>
 <p>梦境是嘈杂不安的，因此伊斯克拉并不怎么喜欢做梦。在梦境当中杂乱的、高速闪过的色彩，就像是陷在泥泞里的可口可乐塑料外包装一样。叶夫根尼离开了，逃走了，有人说他是叛徒。而她只是听着并且记录着这些声响，然后在无数个骤雨当中感到一种怀念，又继续向前行进，昂首以崇高的精神忍受那些泥泞被太阳的光线晒成尘土，直到心脏的跳动和不安越发激烈，直到她自己也化为尘土，直到——</p>
 <p>她在阴沉的早上醒来，把头埋在手臂之间，自回到莫斯科之后第一次感到麻木的痛苦爬上脊背，像是脚踝的暗伤一样隐隐作痛。</p>
-<p></p>
+<p>　</p>
 <p>第十七天，终于，邮局有了她的信件。</p>
 <p>伊斯克拉将信件贴在自己的右胸膛上，咚咚，咚咚，这么走回了家。</p>
 <p>她展开信封，走到楼梯口，这样走廊的灯光便能照在内页上了。她读了一遍，又一遍，然后把它对半折起放入外套的口袋当中，打开门走回房间里。</p>
-<p>*还没有结束。*于是她再一次告诉自己，<em>还没有结束，起码不是现在。</em></p>
+<p><em>还没有结束。</em>于是她再一次告诉自己，<em>还没有结束，起码不是现在。</em></p>
 ]]></content>
       <categories>
         <category>trpg</category>
@@ -197,57 +205,18 @@
       </tags>
   </entry>
   <entry>
-    <title>「电子测试平台与工具2」计算机串口使用和测量</title>
-    <url>/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/</url>
-    <content><![CDATA[<p>普通的计算机串口使用和测量实验报告</p>
-<span id="more"></span>
-<h1>Linux平台串口数据接收</h1>
-<h2 id="一、-实验目的">一、   实验目的</h2>
-<p>1、熟练使用Linux下io函数read、write和epoll函数</p>
-<p>2、了解Linux设备文件机制</p>
-<p>3、熟练使用示波器识读UART波形</p>
-<h2 id="二、实验过程">二、实验过程</h2>
-<h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序">1、按照3.3.1节说明，向STC单片计算机板下载程序</h3>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
-<p>安装驱动之后，连接上了板子，成功写入程序。</p>
-<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率">2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
-<p>连接示波器后，测量得大概的时间为26us，通过计算（1000000/26）得出波特率为38,461.53846153846。</p>
-<p>查询标准波特率表，找到常用波特率中38400一项，确定波特率为38400.</p>
-<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改">3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
-<p>阅读并修改程序当中波特率为38400</p>
-<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
-<p>编译程序，将设备链接到虚拟机，使用超级用户权限执行，得到结果。</p>
-<h3 id="4、使用如下命令将序列号提交到本次实验服务器">4、使用如下命令将序列号提交到本次实验服务器</h3>
-<p>于是综合学号和序列号，发送</p>
-<blockquote>
-<p>curl&quot;132.232.98.70:6363/checkBaud?id=[         ]&amp;v=c27f3439161361692a55fb&quot;</p>
-</blockquote>
-<p>得到OK</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>电子测试平台与工具2</category>
-      </categories>
-      <tags>
-        <tag>体裁：技术文章</tag>
-        <tag>科目：电子测试平台与工具2</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>「独立游戏」夏日回响</title>
     <url>/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/</url>
     <content><![CDATA[<p>去年担任策划和美术（我也不知道怎么回事但就是这样）和队友们参加校内西山居比赛的作品，很喜欢的点子，可惜受限于时间没能完全呈现出来。</p>
 <p><strong>夏日回响的回响——永恒的高考和夏日，青春的尾巴</strong></p>
-<img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/x.jpeg" class title="img">
+<img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/x.jpeg" alt="img" style="zoom:80%;">
+
 <span id="more"></span>
+
 <blockquote>
 <p>原本发表于2021-6-8 12:15，建立了博客归档一下</p>
 </blockquote>
-<h2 id="记录">记录</h2>
-<p>说起夏日，会想到什么？蝉鸣，海边——或者说，高考。</p>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>说起夏日，会想到什么？蝉鸣，海边——或者说，高考。</p>
 <p>一开始是信笔涂鸦出了一个高中生的形象，然后思维继续放飞，游戏的故事就生长出来了。</p>
 <p>“离高考还有…天”的倒计时，可能是很多人的心理阴影。然而从另一方面来看，高中时期也是美好的。热烈、单纯、目标明确、跨过一个个难关。往后的人生却不像这么单纯。</p>
 <p>那么，你会不会有时候想——退回过去？</p>
@@ -263,14 +232,17 @@
 <p>然后其他队伍也真的很震撼，蒸汽茶壶的画面和音乐，还有后面一队的建模。不过，我们也有自己独一无二的优点，完成度和剧情结合，还是挺自豪的。能得第一真的是超开心（所以说什么时候聚餐）</p>
 <p>最后，不想当策划的程序员不是好美工.jpg 准备继续在不务正业的路上加油（不是）。</p>
 <img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211355873.png" alt="image-20220516211355873" style="zoom:80%;">
+
 <p>最后再摸摸主角女儿的头。高考不是终点，夏日才刚刚开始。也算是对这些天的心情的一个记录吧。</p>
-<h2 id="文案">文案</h2>
-<img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211438084.png" alt="image-20220516211438084" style="zoom:50%;">
+<h2 id="文案"><a href="#文案" class="headerlink" title="文案"></a>文案</h2><img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211438084.png" alt="image-20220516211438084" style="zoom:50%;">
+
 <img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211508765.png" alt="image-20220516211508765" style="zoom:50%;">
+
 <img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211549646.png" alt="image-20220516211549646" style="zoom:50%;">
+
 <img src="/2022/05/16/%E3%80%8C%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E3%80%8D%E5%A4%8F%E6%97%A5%E5%9B%9E%E5%93%8D/image-20220516211607577.png" alt="image-20220516211607577" style="zoom:50%;">
-<h2 id="地址">地址</h2>
-<p><a href="https://share.weiyun.com/GaO6w7r0">https://share.weiyun.com/GaO6w7r0</a> 游戏在这里，如果感兴趣可以玩玩（虽然有点粗糙hhh）</p>
+
+<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p><a href="https://share.weiyun.com/GaO6w7r0">https://share.weiyun.com/GaO6w7r0</a> 游戏在这里，如果感兴趣可以玩玩（虽然有点粗糙hhh）</p>
 ]]></content>
       <categories>
         <category>独立游戏</category>
@@ -281,50 +253,57 @@
       </tags>
   </entry>
   <entry>
-    <title>「计算机系统」课程作业_四</title>
-    <url>/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/</url>
-    <content><![CDATA[<p>《深入理解计算机系统》，<em>第五章：优化程序性能</em> 和<em>第六章：存储器层次结构</em> 的部分作业</p>
+    <title>「电子测试平台与工具2」计算机串口使用和测量</title>
+    <url>/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/</url>
+    <content><![CDATA[<p>普通的计算机串口使用和测量实验报告</p>
 <span id="more"></span>
-<h2 id="深入理解计算机系统（2版）5-17">深入理解计算机系统（2版）5.17</h2>
-<p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193238835.png" alt="image-20220516193238835"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193318663.png" alt="image-20220516193318663"></p>
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193408307.png" class title="image-20220516193408307">
-<hr>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">inner_517</span><span class="params">(vec_ptr x, vec_ptr y, <span class="type">data_t</span> *dest)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i, length=<span class="built_in">vec_length</span>(x);</span><br><span class="line">    <span class="type">int</span> limit=length<span class="number">-2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">data_t</span> *xdata, *ydata, sum0=<span class="number">0</span>, sum1=<span class="number">0</span>, sum2=<span class="number">0</span>;</span><br><span class="line">    xdata=<span class="built_in">get_vec_start</span>(x);</span><br><span class="line">    ydata=<span class="built_in">get_vec_start</span>(y);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//三路并行相加</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;limit; i+=<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        sum1+=xdata[i+<span class="number">1</span>]*ydata[i+<span class="number">1</span>];</span><br><span class="line">        sum2+=xdata[i+<span class="number">2</span>]*ydata[i+<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i&lt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    *dest=sum0+sum1+sum2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>A</strong></p>
-<ul>
-<li>每个结点都起码需要用两个寄存器来存储和操作，但一个时钟周期只能给一个寄存器加载一个值</li>
-</ul>
-<p><strong>B</strong></p>
-<ul>
-<li>在 IA32 上寄存器的数量不够多</li>
-</ul>
-<h2 id="深入理解计算机系统（2版）5-19">深入理解计算机系统（2版）5.19</h2>
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193441059.png" class title="image-20220516193441059">
-<hr>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> *<span class="title">basic_memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> word=<span class="number">0</span>, *slong, cnt=<span class="number">0</span>, i;</span><br><span class="line">    <span class="type">char</span> *schar;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">3</span>*<span class="built_in">sizeof</span>(word)) <span class="keyword">return</span> <span class="built_in">basic_memset</span>(s, c, n);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="built_in">sizeof</span>(word); i++) word=(word&lt;&lt;<span class="number">8</span>)|(c&amp;<span class="number">0xff</span>);</span><br><span class="line">        schar=s;</span><br><span class="line">        <span class="keyword">while</span>(schar%<span class="built_in">sizeof</span>(word)!=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *schar++=c;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    slong=schar;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;n<span class="number">-2</span>*<span class="built_in">sizeof</span>(word)+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        *slong=word;</span><br><span class="line">        cnt+=<span class="number">2</span>*<span class="built_in">sizeof</span>(word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="同上，6-42-6-44">同上，6.42+6.44</h2>
-<p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193510091.png" alt="image-20220516193510091"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193523815.png" alt="image-20220516193523815"></p>
-<hr>
-<p>每个 <code>pixel</code> 结构体里面四个 <code>char</code> ，总共占四个字节，所以一个结构体刚好占高速缓存的一行。代码是遍历这个结构体，因此每次就是 miss hit hit hit。</p>
-<p><strong>不命中率为25%</strong>。</p>
-<hr>
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193549343.png" class title="image-20220516193549343">
-<hr>
-<p>每次都把相邻的四个字节的结构体赋值为0，所以<strong>不命中率是100%</strong></p>
-<hr>
-<h2 id="参考答案">参考答案</h2>
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516200530945.png" class title="image-20220516200530945">
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516203004223.png" class title="image-20220516203004223">
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516205953898.png" class title="image-20220516205953898">
-<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516210008192.png" class title="image-20220516210008192">
+
+<h1 id="Linux平台串口数据接收"><a href="#Linux平台串口数据接收" class="headerlink" title="Linux平台串口数据接收"></a>Linux平台串口数据接收</h1><h2 id="一、-实验目的"><a href="#一、-实验目的" class="headerlink" title="一、   实验目的"></a>一、   实验目的</h2><p>1、熟练使用Linux下io函数read、write和epoll函数</p>
+<p>2、了解Linux设备文件机制</p>
+<p>3、熟练使用示波器识读UART波形</p>
+<h2 id="二、实验过程"><a href="#二、实验过程" class="headerlink" title="二、实验过程"></a>二、实验过程</h2><h3 id="1、按照3-3-1节说明，向STC单片计算机板下载程序"><a href="#1、按照3-3-1节说明，向STC单片计算机板下载程序" class="headerlink" title="1、按照3.3.1节说明，向STC单片计算机板下载程序"></a>1、按照3.3.1节说明，向STC单片计算机板下载程序</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172510926.png" alt="image-20220516172510926"></p>
+<p>安装驱动之后，连接上了板子，成功写入程序。</p>
+<h3 id="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"><a href="#2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率" class="headerlink" title="2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率"></a>2、使用示波器观察STC单片机UART串口输出信号，识别单片机发送数据所使用的波特率</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172520468.png" alt="image-20220516172520468"></p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172528369.png" alt="image-20220516172528369"></p>
+<p>连接示波器后，测量得大概的时间为26us，通过计算（1000000&#x2F;26）得出波特率为38,461.53846153846。</p>
+<p>查询标准波特率表，找到常用波特率中38400一项，确定波特率为38400.</p>
+<h3 id="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"><a href="#3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改" class="headerlink" title="3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改"></a>3、根据单片机串口波特率，编写C语言程序从虚拟机的串口读取信息。下面是不完整的参考示例，可以根据自己需要进行修改</h3><p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172628993.png" alt="image-20220516172628993"></p>
+<p>阅读并修改程序当中波特率为38400</p>
+<p><img src="/2022/05/16/%E3%80%8C%E7%94%B5%E5%AD%90%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%B7%A5%E5%85%B72%E3%80%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%B2%E5%8F%A3%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%8B%E9%87%8F/image-20220516172700060.png" alt="image-20220516172700060"></p>
+<p>编译程序，将设备链接到虚拟机，使用超级用户权限执行，得到结果。</p>
+<h3 id="4、使用如下命令将序列号提交到本次实验服务器"><a href="#4、使用如下命令将序列号提交到本次实验服务器" class="headerlink" title="4、使用如下命令将序列号提交到本次实验服务器"></a>4、使用如下命令将序列号提交到本次实验服务器</h3><p>于是综合学号和序列号，发送</p>
+<blockquote>
+<p>curl”132.232.98.70:6363&#x2F;checkBaud?id&#x3D;[         ]&amp;v&#x3D;c27f3439161361692a55fb”</p>
+</blockquote>
+<p>得到OK</p>
 ]]></content>
       <categories>
         <category>技术</category>
-        <category>计算机系统</category>
+        <category>电子测试平台与工具2</category>
       </categories>
       <tags>
-        <tag>书籍：深入理解计算机系统</tag>
+        <tag>体裁：技术文章</tag>
+        <tag>科目：电子测试平台与工具2</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>「画廊」消逝</title>
+    <url>/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/</url>
+    <content><![CDATA[<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/image-20220521150714365.png" alt="image-20220521150714365" style="zoom:80%;">
+
+<p>无计延春日，可能留少年。</p>
+<span id="more"></span>
+
+<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/sprintpast2.jpg" alt="sprintpast2" style="height: auto;">
+
+<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/springpast1.jpg" alt="springpast1" style="height: auto;">
+
+<p>属于一个写不出来的故事，年少时春日的一隅</p>
+]]></content>
+      <categories>
+        <category>画廊</category>
+        <category>未分类</category>
+      </categories>
   </entry>
   <entry>
     <title>「阅读相关-电子书」在Windows和Android系统下Epub下载、格式转换、制作和阅读的资源汇总</title>
@@ -332,9 +311,10 @@
     <content><![CDATA[<p>现在用以看书的时间渐少，kobo h2o屏幕也坏了。多多少少也怀念着以前折腾 epub 、折腾 kobo 系统（准确来讲是被折腾）然后摸鱼读书的高中时光。</p>
 <p>这里做一些资源汇总的书签和指路，以慰电纸书的在天之灵。<em>谢谢你的陪伴，晚安(  ߹꒳߹ )</em></p>
 <span id="more"></span>
+
 <!-- toc -->
-<h1>下载资源</h1>
-<p>「1」<a href="https://www.shuxiangjia.cn/">书享家 - 电子书下载导航</a></p>
+
+<h1 id="下载资源"><a href="#下载资源" class="headerlink" title="下载资源"></a>下载资源</h1><p>「1」<a href="https://www.shuxiangjia.cn/">书享家 - 电子书下载导航</a></p>
 <p>极其恐怖地收集了相当多的网站，不过质量、稳定程度和收费程度不定。如果有时间，可以进去慢慢淘。</p>
 <p>「2」<a href="https://1lib.limited/">Zlibrary</a></p>
 <p>大名鼎鼎，好用，但是现在似乎被墙了。对一些比较冷门的中文书籍搜索没那么擅长，但也不错。</p>
@@ -342,23 +322,18 @@
 <p>个人比较常用，简单全面低门槛，不需要注册。缺点是由于来源不一，书的制作质量也良莠不齐。</p>
 <hr>
 <p>下载资源的网站某种程度上都挺艰难的，心怀感恩。当然，有条件还是要支持正版，获取方便不说，校对、格式一般也更好。</p>
-<h1>格式转换</h1>
-<h2 id="在线">在线</h2>
-<p><a href="https://www.ofoct.com/ebooktool/zh/mobi-to-epubI">『小熊电子书转换工具』</a></p>
+<h1 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h1><h2 id="在线"><a href="#在线" class="headerlink" title="在线"></a>在线</h2><p><a href="https://www.ofoct.com/ebooktool/zh/mobi-to-epubI">『小熊电子书转换工具』</a></p>
 <p>点击即用。简单，免费，速度算是快的。</p>
-<h2 id="本地（Windows）">本地（Windows）</h2>
-<p><a href="https://www.neat-reader.com/downloads/converter">『NeatConverter』</a></p>
+<h2 id="本地（Windows）"><a href="#本地（Windows）" class="headerlink" title="本地（Windows）"></a>本地（Windows）</h2><p><a href="https://www.neat-reader.com/downloads/converter">『NeatConverter』</a></p>
 <p>界面如下：</p>
 <p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516125139401.png" alt="image-20220516125139401"></p>
 <p>简洁、轻量、无限制，成功率和速度都很高，并且还是免费的。十分推荐！</p>
-<h1>制作</h1>
-<p><a href="https://sigil-ebook.com/">『Sigil』</a></p>
+<h1 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h1><p><a href="https://sigil-ebook.com/">『Sigil』</a></p>
 <p><img src="/2022/05/16/%E3%80%8C%E9%98%85%E8%AF%BB%E7%9B%B8%E5%85%B3-%E7%94%B5%E5%AD%90%E4%B9%A6%E3%80%8D%E5%9C%A8Windows%E5%92%8CAndroid%E7%B3%BB%E7%BB%9F%E4%B8%8BEpub%E4%B8%8B%E8%BD%BD%E3%80%81%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E3%80%81%E5%88%B6%E4%BD%9C%E5%92%8C%E9%98%85%E8%AF%BB%E7%9A%84%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/image-20220516124905944.png" alt="image-20220516124905944"></p>
 <p>虽然看上去界面复杂了一点，但实际上只要稍微学点正则，基础的操作如从txt导入、分章节、添加封面和作者等元数据，都十分简单（并且非常利于后期进行样式修改、应用、添加注释等进一步功能）。</p>
 <p>我之前有看到使用 epubstar 类似软件制作的 epub 电子书，表面上还不错，实际上打开之后会发现它的样式表和样式标签简直就是地狱般的复杂，能想象出制作者受的折磨。</p>
 <p>所以建议一开始就上手 sigil 类似软件，表面上的高门槛不一定高。</p>
-<h1>阅读</h1>
-<p>由于我之前一直是导入 kobo h2o 之后再阅读，电纸书坏了后则没什么时间读书了，所以这方面没有很多研究，处于一种凑合就行的状态。</p>
+<h1 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h1><p>由于我之前一直是导入 kobo h2o 之后再阅读，电纸书坏了后则没什么时间读书了，所以这方面没有很多研究，处于一种凑合就行的状态。</p>
 <p>手机端我使用的是『掌阅』，随便找了个破解本地版，还行，就是导入不太好。据说如果愿意折腾一会的话，『静读天下』很好用。</p>
 <p>Windows系统下，使用的是『NeatReader』，免费版有一定限制。没错，和前面的格式转换就是同一家…… 总之这推广对我成功了✓</p>
 ]]></content>
@@ -374,39 +349,96 @@
       </tags>
   </entry>
   <entry>
-    <title>「画廊」消逝</title>
-    <url>/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/</url>
-    <content><![CDATA[<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/image-20220521150714365.png" alt="image-20220521150714365" style="zoom:80%;">
-<p>无计延春日，可能留少年。</p>
+    <title>「计算机系统」课程作业_四</title>
+    <url>/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/</url>
+    <content><![CDATA[<p>《深入理解计算机系统》，<em>第五章：优化程序性能</em> 和<em>第六章：存储器层次结构</em> 的部分作业</p>
 <span id="more"></span>
-<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/sprintpast2.jpg" alt="sprintpast2" style="zoom:80%;">
-<img src="/2022/05/21/%E3%80%8C%E7%94%BB%E5%BB%8A%E3%80%8D%E6%B6%88%E9%80%9D/springpast1.jpg" alt="springpast1" style="zoom:80%;">
-<p>属于一个写不出来的故事，年少时春日的一隅</p>
+
+
+
+<h2 id="深入理解计算机系统（2版）5-17"><a href="#深入理解计算机系统（2版）5-17" class="headerlink" title="深入理解计算机系统（2版）5.17"></a>深入理解计算机系统（2版）5.17</h2><p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193238835.png" alt="image-20220516193238835"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193318663.png" alt="image-20220516193318663"></p>
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193408307.png" class title="image-20220516193408307">
+
+<hr>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">inner_517</span><span class="params">(vec_ptr x, vec_ptr y, <span class="type">data_t</span> *dest)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i, length=<span class="built_in">vec_length</span>(x);</span><br><span class="line">    <span class="type">int</span> limit=length<span class="number">-2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">data_t</span> *xdata, *ydata, sum0=<span class="number">0</span>, sum1=<span class="number">0</span>, sum2=<span class="number">0</span>;</span><br><span class="line">    xdata=<span class="built_in">get_vec_start</span>(x);</span><br><span class="line">    ydata=<span class="built_in">get_vec_start</span>(y);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//三路并行相加</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;limit; i+=<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        sum1+=xdata[i+<span class="number">1</span>]*ydata[i+<span class="number">1</span>];</span><br><span class="line">        sum2+=xdata[i+<span class="number">2</span>]*ydata[i+<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i&lt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        sum0+=xdata[i]*ydata[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    *dest=sum0+sum1+sum2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>A</strong></p>
+<ul>
+<li>每个结点都起码需要用两个寄存器来存储和操作，但一个时钟周期只能给一个寄存器加载一个值</li>
+</ul>
+<p><strong>B</strong></p>
+<ul>
+<li>在 IA32 上寄存器的数量不够多</li>
+</ul>
+<h2 id="深入理解计算机系统（2版）5-19"><a href="#深入理解计算机系统（2版）5-19" class="headerlink" title="深入理解计算机系统（2版）5.19"></a>深入理解计算机系统（2版）5.19</h2><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193441059.png" class title="image-20220516193441059">
+
+<hr>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> *<span class="title">basic_memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> word=<span class="number">0</span>, *slong, cnt=<span class="number">0</span>, i;</span><br><span class="line">    <span class="type">char</span> *schar;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">3</span>*<span class="built_in">sizeof</span>(word)) <span class="keyword">return</span> <span class="built_in">basic_memset</span>(s, c, n);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="built_in">sizeof</span>(word); i++) word=(word&lt;&lt;<span class="number">8</span>)|(c&amp;<span class="number">0xff</span>);</span><br><span class="line">        schar=s;</span><br><span class="line">        <span class="keyword">while</span>(schar%<span class="built_in">sizeof</span>(word)!=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *schar++=c;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    slong=schar;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;n<span class="number">-2</span>*<span class="built_in">sizeof</span>(word)+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        *slong=word;</span><br><span class="line">        cnt+=<span class="number">2</span>*<span class="built_in">sizeof</span>(word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="同上，6-42-6-44"><a href="#同上，6-42-6-44" class="headerlink" title="同上，6.42+6.44"></a>同上，6.42+6.44</h2><p><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193510091.png" alt="image-20220516193510091"><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193523815.png" alt="image-20220516193523815"></p>
+<hr>
+<p>每个 <code>pixel</code> 结构体里面四个 <code>char</code> ，总共占四个字节，所以一个结构体刚好占高速缓存的一行。代码是遍历这个结构体，因此每次就是 miss hit hit hit。</p>
+<p>**不命中率为25%**。</p>
+<hr>
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516193549343.png" class title="image-20220516193549343">
+
+<hr>
+<p>每次都把相邻的四个字节的结构体赋值为0，所以<strong>不命中率是100%</strong></p>
+<hr>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516200530945.png" class title="image-20220516200530945">
+
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516203004223.png" class title="image-20220516203004223">
+
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516205953898.png" class title="image-20220516205953898">
+
+<img src="/2022/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/05/16/%E3%80%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8D%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A-%E5%9B%9B/image-20220516210008192.png" class title="image-20220516210008192">
 ]]></content>
       <categories>
-        <category>画廊</category>
-        <category>未分类</category>
+        <category>技术</category>
+        <category>计算机系统</category>
       </categories>
+      <tags>
+        <tag>书籍：深入理解计算机系统</tag>
+      </tags>
   </entry>
   <entry>
-    <title>「魔女之梦」断片：重华大厦楼层引导</title>
-    <url>/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/</url>
-    <content><![CDATA[<p>你走入f3层的走廊，遇见岔路口便向左边走去。</p>
-<p>向着左边转了七个弯后，你看见一块末端卷曲的喷绘布出现在墙上，用被人狠命打了进去、半截没入墙中的圆珠笔勉强固定住。</p>
+    <title>「魔女之梦」概念：锚点</title>
+    <url>/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%A6%82%E5%BF%B5%EF%BC%9A%E9%94%9A%E7%82%B9/</url>
+    <content><![CDATA[<p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
 <span id="more"></span>
-<img src="/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/image-20220516125404183.png" alt="image-20220516125404183" style="zoom:50%;">
-<p>你借着从覆盖了蓝色薄膜的玻璃窗透进来的光线观察它。楼道的光线显得阴暗而寒冷。远远望去，那上面好像是街角小店里常见的菜单，用黄色的楷体印刷在红色背景上，底部印刷了渐变玫瑰和闪亮气泡的装饰，有些模糊。</p>
-<p>你在这个距离下分辨不清上面写着什么，便往前继续走。</p>
-<p>你踩着楼道里的塑料包装袋、烟头和尘土往前走。</p>
-<p>现在你看清楚了。那并不是价目表，而是楼层的对照说明。</p>
-<p>在最上面是5996层，下面是5997，5998，d3，d2，d1，f3，f2，旁边杂乱地对照着会议室、电梯、大厅、家、卧室和公园，余下的部分和印刷的玫瑰、气泡、一片模糊的粉色装饰混杂在了一起，分辨不出。</p>
-<img src="/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/image-20220516125424596.png" alt="image-20220516125424596" style="zoom: 50%;">
-<p>它让你感到头晕目眩。你清楚地知道自己不能注视过久。</p>
-<p>于是你摇摇头，稳定住自己的思想，半眯着眼，在保持注意当前场景的情况下平缓呼吸，然后捡起了旁边的饼干包装袋，用它挑起喷绘布的一角。</p>
-<p>后面什么都没有。</p>
-<p>放下喷绘布后，你又看了一眼这上面印刷的内容。f1之上是g3，对应着泳池和作业本。</p>
-<p>不该继续看下去了。你谨慎地调整着呼吸，不由得叹了口气，转身往楼道的右边岔路口走去，在那里，一面镜子映出了你的身影。</p>
-<p>你转了个弯略过它。</p>
+
+<hr>
+<p>我感到一阵眩晕。那是眩晕，还是一瞬间的错愕？面包店员烟消云消，而我手里提着的椰蓉餐包尚还发出阵阵香味。</p>
+<p>在楼道间窗户的前面，杂物之间，站着一位女性，她注视着我。</p>
+<p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
+<br>
+
+<p>“那是什么？”我不由自主地踉跄着往前走了几步，抓紧了面包袋子。</p>
+<p>我认得她，尽管这让我感到困惑。</p>
+<p>“你活动的中心。在扭曲之时将会动态回归的地方。对你来讲，是这大厦的楼梯口。”</p>
+<p>我一定是显得过于迷惑了，因为她注视着我的眼睛，过了一会，低头补充：“最好的锚点一般被认为是自己家，独居。安心休息的时间是很宝贵的，尽管家里面布局的变动可能会让人困惑。如果锚点在危险的地方，比如说一座摇摇晃晃的木桥，谁知道你会发生什么呢？——而这座大厦……是很多魔女的锚点。”</p>
+<p>她显得出乎意料地耐心。</p>
+<p>“这意味着……？”</p>
+<p>“意味着你很可能捡到更多的断片，参与更多的扭曲，遇到更多同类。”她的手指搓着墙面开裂的泥灰，“看看这地方，物理结构都受到了影响，它是扭曲的汇集点。这很危险，但也因为这样，你或多或少能多知道点东西。在后期，信息就是生命。”</p>
+<p>她从始到终一直没有问我为什么会站在这里，也没有问我刚才发生了什么，像是什么都知道，又像是什么都漠不关心。</p>
+<p>“我明白了。”我沉默了一会，思考着一切里隐藏的信息，“以后会一直这样吗？”</p>
+<p>“多半如此。最后有些人会死在眼前，更多的则是不知所踪。”</p>
+<p>我低下头，沉默了一会。她也没说话。</p>
+<p>过了一会，我听到她微微叹了口气，似乎靠近了一点，温声道：“别害怕…… 所有巫师都会很乐意和你交流的，如果在能确定你也是巫师的情况下。但是——你经历的世界和祂们看到的很可能不一样，不要过于依赖，不要信任祂们。用假名，记住自己的真名。”</p>
+<p>“我能遇见的除了人还有什么？”</p>
+<p>“偷名字的、只言片语、影子、回声与幻觉。虚假的记忆会化作种子在你的梦境里生长。”</p>
+<p>“……起码，起码其他人能够安全的活下来……”</p>
+<p>“嗯哼。”</p>
+<p>她没有再多说一个字，而是看向窗外，半边脸映在光里。沉默的空白在我们之间弥散开，我看着她的脸，或多或少为自己的熟悉感而迷茫。</p>
+<br>
+
+<p>“……所以，你是谁？”</p>
+<p>“啊，”她轻轻地呼了一声，并不显得惊讶，“许狮蛇。”</p>
+<p>“我——我认识你吗？”</p>
+<p>“当然，”她终于笑了起来，我感到莫名的安心和信赖，“你认识我，我也认识你，快一辈子了。”</p>
+<p>她转身往安全出口走去：“那么，走吧，小晏。我们该去公园了。”</p>
 ]]></content>
       <categories>
         <category>原创</category>
@@ -434,38 +466,27 @@
       </tags>
   </entry>
   <entry>
-    <title>「魔女之梦」概念：锚点</title>
-    <url>/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%A6%82%E5%BF%B5%EF%BC%9A%E9%94%9A%E7%82%B9/</url>
-    <content><![CDATA[<p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
+    <title>「魔女之梦」断片：重华大厦楼层引导</title>
+    <url>/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/</url>
+    <content><![CDATA[<p>你走入f3层的走廊，遇见岔路口便向左边走去。</p>
+<p>向着左边转了七个弯后，你看见一块末端卷曲的喷绘布出现在墙上，用被人狠命打了进去、半截没入墙中的圆珠笔勉强固定住。</p>
 <span id="more"></span>
-<hr>
-<p>我感到一阵眩晕。那是眩晕，还是一瞬间的错愕？面包店员烟消云消，而我手里提着的椰蓉餐包尚还发出阵阵香味。</p>
-<p>在楼道间窗户的前面，杂物之间，站着一位女性，她注视着我。</p>
-<p>“所以，这是你的锚点……”她叹息道，“不算好也不算差。”</p>
-<br>
-<p>“那是什么？”我不由自主地踉跄着往前走了几步，抓紧了面包袋子。</p>
-<p>我认得她，尽管这让我感到困惑。</p>
-<p>“你活动的中心。在扭曲之时将会动态回归的地方。对你来讲，是这大厦的楼梯口。”</p>
-<p>我一定是显得过于迷惑了，因为她注视着我的眼睛，过了一会，低头补充：“最好的锚点一般被认为是自己家，独居。安心休息的时间是很宝贵的，尽管家里面布局的变动可能会让人困惑。如果锚点在危险的地方，比如说一座摇摇晃晃的木桥，谁知道你会发生什么呢？——而这座大厦……是很多魔女的锚点。”</p>
-<p>她显得出乎意料地耐心。</p>
-<p>“这意味着……？”</p>
-<p>“意味着你很可能捡到更多的断片，参与更多的扭曲，遇到更多同类。”她的手指搓着墙面开裂的泥灰，“看看这地方，物理结构都受到了影响，它是扭曲的汇集点。这很危险，但也因为这样，你或多或少能多知道点东西。在后期，信息就是生命。”</p>
-<p>她从始到终一直没有问我为什么会站在这里，也没有问我刚才发生了什么，像是什么都知道，又像是什么都漠不关心。</p>
-<p>“我明白了。”我沉默了一会，思考着一切里隐藏的信息，“以后会一直这样吗？”</p>
-<p>“多半如此。最后有些人会死在眼前，更多的则是不知所踪。”</p>
-<p>我低下头，沉默了一会。她也没说话。</p>
-<p>过了一会，我听到她微微叹了口气，似乎靠近了一点，温声道：“别害怕…… 所有巫师都会很乐意和你交流的，如果在能确定你也是巫师的情况下。但是——你经历的世界和祂们看到的很可能不一样，不要过于依赖，不要信任祂们。用假名，记住自己的真名。”</p>
-<p>“我能遇见的除了人还有什么？”</p>
-<p>“偷名字的、只言片语、影子、回声与幻觉。虚假的记忆会化作种子在你的梦境里生长。”</p>
-<p>“……起码，起码其他人能够安全的活下来……”</p>
-<p>“嗯哼。”</p>
-<p>她没有再多说一个字，而是看向窗外，半边脸映在光里。沉默的空白在我们之间弥散开，我看着她的脸，或多或少为自己的熟悉感而迷茫。</p>
-<br>
-<p>“……所以，你是谁？”</p>
-<p>“啊，”她轻轻地呼了一声，并不显得惊讶，“许狮蛇。”</p>
-<p>“我——我认识你吗？”</p>
-<p>“当然，”她终于笑了起来，我感到莫名的安心和信赖，“你认识我，我也认识你，快一辈子了。”</p>
-<p>她转身往安全出口走去：“那么，走吧，小晏。我们该去公园了。”</p>
+
+<img src="/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/image-20220516125404183.png" alt="image-20220516125404183" style="zoom:50%;">
+
+<p>你借着从覆盖了蓝色薄膜的玻璃窗透进来的光线观察它。楼道的光线显得阴暗而寒冷。远远望去，那上面好像是街角小店里常见的菜单，用黄色的楷体印刷在红色背景上，底部印刷了渐变玫瑰和闪亮气泡的装饰，有些模糊。</p>
+<p>你在这个距离下分辨不清上面写着什么，便往前继续走。</p>
+<p>你踩着楼道里的塑料包装袋、烟头和尘土往前走。</p>
+<p>现在你看清楚了。那并不是价目表，而是楼层的对照说明。</p>
+<p>在最上面是5996层，下面是5997，5998，d3，d2，d1，f3，f2，旁边杂乱地对照着会议室、电梯、大厅、家、卧室和公园，余下的部分和印刷的玫瑰、气泡、一片模糊的粉色装饰混杂在了一起，分辨不出。</p>
+<img src="/2022/05/16/%E3%80%8C%E9%AD%94%E5%A5%B3%E4%B9%8B%E6%A2%A6%E3%80%8D%E6%96%AD%E7%89%87%EF%BC%9A%E9%87%8D%E5%8D%8E%E5%A4%A7%E5%8E%A6%E6%A5%BC%E5%B1%82%E5%BC%95%E5%AF%BC/image-20220516125424596.png" alt="image-20220516125424596" style="zoom: 50%;">
+
+<p>它让你感到头晕目眩。你清楚地知道自己不能注视过久。</p>
+<p>于是你摇摇头，稳定住自己的思想，半眯着眼，在保持注意当前场景的情况下平缓呼吸，然后捡起了旁边的饼干包装袋，用它挑起喷绘布的一角。</p>
+<p>后面什么都没有。</p>
+<p>放下喷绘布后，你又看了一眼这上面印刷的内容。f1之上是g3，对应着泳池和作业本。</p>
+<p>不该继续看下去了。你谨慎地调整着呼吸，不由得叹了口气，转身往楼道的右边岔路口走去，在那里，一面镜子映出了你的身影。</p>
+<p>你转了个弯略过它。</p>
 ]]></content>
       <categories>
         <category>原创</category>
