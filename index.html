@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-21 19:43:41 / 修改时间：21:20:31" itemprop="dateCreated datePublished" datetime="2022-05-21T19:43:41+08:00">2022-05-21</time>
+              <time title="创建时间：2022-05-21 19:43:41 / 修改时间：21:28:57" itemprop="dateCreated datePublished" datetime="2022-05-21T19:43:41+08:00">2022-05-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,215 +229,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="19-分页：TLB"><a href="#19-分页：TLB" class="headerlink" title="19 分页：TLB"></a>19 分页：TLB</h1><table>
-<thead>
-<tr>
-<th>TLB</th>
-<th>Translationg-lookside buffer</th>
-<th>地址转换旁路缓冲存储器</th>
-<th>分页当中虚拟到物理地址转换的硬件缓存（cache），用以加速地址转换</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>VPN</strong></td>
-<td>virtual page number</td>
-<td>虚拟页面号</td>
-<td>由虚拟页面号得知页在哪里</td>
-</tr>
-<tr>
-<td><strong>PFN</strong></td>
-<td>physical page number</td>
-<td>物理帧号</td>
-<td>所在的位置。通过用 PFN 替换 VPN 来转换虚拟地址</td>
-</tr>
-<tr>
-<td><strong>页表</strong></td>
-<td>page table</td>
-<td>页表</td>
-<td>为地址空间的每个虚拟页面保存地址转换（address translation）的一个数据结构</td>
-</tr>
-<tr>
-<td><strong>PTE</strong></td>
-<td>page table entries</td>
-<td>页表项</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>PDE</strong></td>
-<td>page directory entries</td>
-<td>页目录项</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>先检查 TLB 里面有没有对应 VPN 的转换映射，如果没有再查询页表</p>
-<ul>
-<li>页表一个项 <strong>有效位</strong> 为0：该页没有被进程申请，不该被访问，访问应该被陷入操作系统</li>
-</ul>
-<hr>
-<p>TLB 的内容</p>
-<ul>
-<li>VPN | PFN | 其它位</li>
-</ul>
-<p>对上下文切换的支持</p>
-<ul>
-<li>为 TLB 里增加<strong>地址空间标识符（address space identifier，ASID）</strong></li>
-</ul>
-<p>替换策略</p>
-<ul>
-<li>LRU 最近最少使用</li>
-<li>随机</li>
-</ul>
-<br>
-
-<h1 id="20-分页：较小的表"><a href="#20-分页：较小的表" class="headerlink" title="20 分页：较小的表"></a>20 分页：较小的表</h1><p>如何让页表变得更小以改变性能？</p>
-<p>更大的页</p>
-<br>
-
-<p><strong>混合分页和分段</strong></p>
-<ul>
-<li>给每个不同的段建立独自的页表</li>
-<li>seg | vpn |offset</li>
-<li>显著的内存节省，但仍然需要分段</li>
-</ul>
-<br>
-
-<p><strong>多级页表</strong></p>
-<ul>
-<li><p>将线性页表分为页大小的单元，用 <strong>页目录项（page directory entries, PDE）</strong>记录，树状结构</p>
-</li>
-<li><p>一个 PED 有效位为1：该项所指的页当中，至少有一个 PTE ，其有效位为1</p>
-</li>
-<li><p>牺牲时间（未命中时需要加载两次），增加了复杂性</p>
-</li>
-<li><p>页目录索引（PDIndex） | 页表索引（PTIndex） | 偏移量</p>
-<ul>
-<li>PDEAddr &#x3D; PageDirBase + PDIndex*sizeof PDE</li>
-<li>PTEAddr &#x3D; (PDE.PFN&lt;&lt;SHIFT) + PTIndex*sizeof PTE</li>
-</ul>
-</li>
-<li><p>更深的树</p>
-</li>
-</ul>
-<br>
-
-<p>反向页表</p>
-<ul>
-<li><p>一般的进程每个一个页表，这个只保留一个，对应物理页</p>
-</li>
-<li><p>页表项内容是哪个进程在使用这个页表项和这个物理页对应的是什么VPN</p>
-  <br></li>
-</ul>
-<h1 id="21-超越物理内存：机制"><a href="#21-超越物理内存：机制" class="headerlink" title="21 超越物理内存：机制"></a>21 超越物理内存：机制</h1><p>放不下的时候使用磁盘（或者其他什么缓慢而巨大的设备）提供巨大虚拟地址空间的假象</p>
-<p><strong>交换空间 swap space</strong></p>
-<ul>
-<li>硬盘上开辟的部分空间，以页为大小读取或写入</li>
-</ul>
-<hr>
-<p>当硬件查找 PTE 的时候，可能会通过 <strong>存在位（present bit）</strong> 发现该页不在内存中，这个时候就会引发 <strong>页错误（page fault）</strong>，由操作系统来接管并且通过 <strong>硬盘I&#x2F;O操作</strong> 把页读取（page in）进来</p>
-<blockquote>
-<p>尽管这种访问实际上是完全合法的，但它还是被称为页错误</p>
-</blockquote>
-<details><summary>CLICK ME</summary>
-
-<hr>
-<p><img src="/2022/05/21/%E3%80%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8D%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%8819%E2%80%94%E2%80%94-%EF%BC%89/image-20220521205641277.png" alt="image-20220521205641277" style="zoom:80%;"><img src="/2022/05/21/%E3%80%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8D%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%8819%E2%80%94%E2%80%94-%EF%BC%89/image-20220521205659772.png" alt="image-20220521205659772" style="zoom:80%;"></p>
-<blockquote>
-<p>当 TLB 未命中发生的时候有 3 种重要情景。 </p>
-<ul>
-<li>第一种情况，该页存在（present）且有效（valid）（第 18～21 行）。在这种情况下，TLB 未 命中处理程序可以简单地从 PTE 中获取 PFN，然后重试指令（这次 TLB 会命中），并因此 继续前面描述的流程。</li>
-<li>第二种情况（第 22～23 行），页错误处理程序需要运行。虽然这是 进程可以访问的合法页（毕竟是有效的），但它并不在物理内存中。</li>
-<li>第三种情况，访问的是 一个无效页，可能由于程序中的错误（第 13～14 行）。在这种情况下，PTE 中的其他位都 不重要了。硬件捕获这个非法访问，操作系统陷阱处理程序运行，可能会杀死非法进程。</li>
-</ul>
-</blockquote>
-<hr>
-<img src="/2022/05/21/%E3%80%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8D%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%8819%E2%80%94%E2%80%94-%EF%BC%89/image-20220521205741522.png" alt="image-20220521205741522" style="zoom:80%;">
-
-<blockquote>
-<p>为了处理页错误</p>
-<ul>
-<li>首先， 操作系统必须为将要换入的页找到一个物理帧，<ul>
-<li>如果没有这样的物理帧，我们将不得不等 待交换算法运行，并从内存中踢出一些页，释放帧供这里使用。</li>
-</ul>
-</li>
-<li>在获得物理帧后，处理程 序发出 I&#x2F;O 请求从交换空间读取页。</li>
-<li>最后，当这个慢操作完成时，操作系统更新页表并重试 指令。</li>
-</ul>
-<p>重试将导致 TLB 未命中，然后再一次重试时，TLB 命中，此时硬件将能够访问所需 的值。</p>
-</blockquote>
-</details>
-
-<hr>
-<p><strong>交换发生时机</strong></p>
-<ul>
-<li>高水位线，high watermark, HW</li>
-<li>交换守护进程（swap deamon）在高水位线被唤醒，清理到低水位线 LW</li>
-</ul>
-<hr>
-<p>To be continue……</p>
-<ul>
-<li>页交换策略</li>
-<li>页聚集或分组写入</li>
-</ul>
-<p>————</p>
-<h1 id="22-超越物理内存：策略"><a href="#22-超越物理内存：策略" class="headerlink" title="22 超越物理内存：策略"></a>22 超越物理内存：策略</h1><p><strong>替换策略</strong></p>
-<p>平均内存访问时间，average memory access time，AMAT</p>
-<ul>
-<li><p>OPT</p>
-<ul>
-<li>optimal，理论上的最优策略</li>
-</ul>
-</li>
-<li><p>FIFO 先进先出</p>
-</li>
-<li><p>随机</p>
-</li>
-<li><p><strong>LRU</strong></p>
-<ul>
-<li>least-frequently-used，最少最近使用</li>
-<li>实现的性能开销大</li>
-</ul>
-</li>
-<li><p>近似LRU</p>
-<ul>
-<li><p>时钟算法（clock algorithm）</p>
-<ul>
-<li><blockquote>
-<p>当必须进行页替换时，操作系统检查当前指向的页 P 的使用位是 1 还是 0。如果是 1，则意味着页面 P 最近被使用， 因此不适合被替换。然后，P 的使用位设置为 0，时钟指针递增到下一页（P + 1）。该算法一直持续到找到一个使用位为 0 的页，使用位为 0 意味着这个页最近没有被使用过（在最坏的情况下，所有的页都已经被使用了，那么就将所有页的使用位都设置为 0）。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>考虑脏页</p>
-<ul>
-<li>被修改过的（脏的）页面写回硬盘会很昂贵，因此优先踢出干净的页</li>
-<li><strong>脏位（dirty bit）</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><strong>未命中的类型</strong></p>
-<ul>
-<li>强制性未命中，冷启动未命中</li>
-<li>容量未命中</li>
-<li>冲突未命中</li>
-</ul>
-<hr>
-<p>其他</p>
-<ul>
-<li><p>预取</p>
-</li>
-<li><p>写入策略：聚集写入，分组写入</p>
-</li>
-<li><p>应对抖动</p>
-<ul>
-<li>准入控制：不运行某些进程</li>
-<li>杀手程序：杀死内存密集型进程</li>
-</ul>
-</li>
-</ul>
-
+          <p>分页和超越物理内存</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/21/%E3%80%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8D%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%8819%E2%80%94%E2%80%94-%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -481,7 +281,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-21 15:05:23 / 修改时间：15:26:53" itemprop="dateCreated datePublished" datetime="2022-05-21T15:05:23+08:00">2022-05-21</time>
+              <time title="创建时间：2022-05-21 15:05:23 / 修改时间：21:29:39" itemprop="dateCreated datePublished" datetime="2022-05-21T15:05:23+08:00">2022-05-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
