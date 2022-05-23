@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="她们小声重复着大厦的名字，你抬头看见……“重华大厦”四个不锈钢的楷体早已陈旧不堪了，一楼的大厅上led滚动屏循环播放着“真实”二字。你乘上电梯，按下已经磨损的按钮，再一次来到了5996层。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一栋老旧的大厦">
-<meta property="og:url" content="http://example.com/tags/coc%E6%A8%A1%E7%BB%84%EF%BC%9A-%E5%BC%80%E7%AB%AF/index.html">
+  <meta name="description" content="static：静态；extern：链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「C」external 和 static 关键字">
+<meta property="og:url" content="http://example.com/2022/05/23/%E3%80%8CC%E3%80%8Dexternal%20%E5%92%8C%20static%20%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
 <meta property="og:site_name" content="一栋老旧的大厦">
-<meta property="og:description" content="她们小声重复着大厦的名字，你抬头看见……“重华大厦”四个不锈钢的楷体早已陈旧不堪了，一楼的大厅上led滚动屏循环播放着“真实”二字。你乘上电梯，按下已经磨损的按钮，再一次来到了5996层。">
+<meta property="og:description" content="static：静态；extern：链接">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-23T12:52:03.000Z">
+<meta property="article:modified_time" content="2022-05-23T12:54:39.580Z">
 <meta property="article:author" content="32w">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/coc%E6%A8%A1%E7%BB%84%EF%BC%9A-%E5%BC%80%E7%AB%AF/">
+<link rel="canonical" href="http://example.com/2022/05/23/%E3%80%8CC%E3%80%8Dexternal%20%E5%92%8C%20static%20%E5%85%B3%E9%94%AE%E5%AD%97/">
 
 
 <script id="page-configurations">
@@ -38,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: coc模组：*开端 | 一栋老旧的大厦</title>
+  <title>「C」external 和 static 关键字 | 一栋老旧的大厦</title>
   
 
 
@@ -157,57 +159,166 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/23/%E3%80%8CC%E3%80%8Dexternal%20%E5%92%8C%20static%20%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="32w">
+      <meta itemprop="description" content="她们小声重复着大厦的名字，你抬头看见……“重华大厦”四个不锈钢的楷体早已陈旧不堪了，一楼的大厅上led滚动屏循环播放着“真实”二字。你乘上电梯，按下已经磨损的按钮，再一次来到了5996层。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一栋老旧的大厦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「C」external 和 static 关键字
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-23 20:52:03 / 修改时间：20:54:39" itemprop="dateCreated datePublished" datetime="2022-05-23T20:52:03+08:00">2022-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/C-C/" itemprop="url" rel="index"><span itemprop="name">C&C++</span></a>
+                </span>
+            </span>
+
+          
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">coc模组：*开端
-          <small>标签</small>
-        </h2>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/05/23/%E3%80%8CC%E3%80%8Dexternal%20%E5%92%8C%20static%20%E5%85%B3%E9%94%AE%E5%AD%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/05/23/%E3%80%8CC%E3%80%8Dexternal%20%E5%92%8C%20static%20%E5%85%B3%E9%94%AE%E5%AD%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <p>static：静态；extern：链接</p>
+<span id="more"></span>
+
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><ul>
+<li><p>全局变量前</p>
+<ul>
+<li><p>使全局变量变成静态全局变量</p>
+<blockquote>
+<p><em>全局变量本身就是静态存储方式，静态全局变量当然也是静态存储方式。这两者在存储方式上并无不同，<strong>区别在于非静态全局变量的作用域是整个源程序，当一个源程序由多个源文件组成时，非静态的全局变量在各个源文件中都是有效的。</strong>而静态全局变量则限制了其作用域，即只在定义该变量的源文件内有效，*<em>在同一源程序的其它源文件中不能使用它。</em></em>[^1]*</p>
+</blockquote>
+</li>
+<li><p>存储方式：静态</p>
+<blockquote>
+<p><strong>静态变量</strong></p>
+<p>在程序执行前系统就为之静态分配存储空间的一类变量</p>
+</blockquote>
+</li>
+<li><p>作用域：定义该变量的源文件</p>
+</li>
+</ul>
+</li>
+<li><p>局部变量前</p>
+<ul>
+<li>静态局部变量</li>
+<li>存储方式：静态。始终驻留在全局数据区，直到结束</li>
+<li>作用域：仍然是局部</li>
+</ul>
+</li>
+<li><p>函数前</p>
+<ul>
+<li>静态函数</li>
+<li>作用域：定义该函数的源文件</li>
+<li>如果声明Inline函数，默认为static类型</li>
+</ul>
+</li>
+</ul>
+<h1 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h1><p>extern的作用范围是：整个工程</p>
+<blockquote>
+<p><strong>全局变量</strong>的作用域为全局,在程序中只需要在一个文件中定义,就可以在所有的源文件中使用。</p>
+<p>在使用时, <strong>在一些不包含全局变量定义的源文件中需要使用 extern 进行声明该全局变量后可直接使用。</strong></p>
+</blockquote>
+<p>推荐的使用方式</p>
+<ul>
+<li>分开定义和声明</li>
+<li>在某个<strong>源文件</strong>中定义且仅定义一次</li>
+<li>在<strong>头文件</strong>中通过extern给出全局变量的声明</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.c				//定义</span></span><br><span class="line"><span class="type">int</span> a = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//a.h			 	//声明</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.c			//使用</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>[^1]: 版权声明：本文为CSDN博主「calm_peng」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40414337/article/details/89304528">https://blog.csdn.net/weixin_40414337/article/details/89304528</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-05-21T10:01:16+08:00"
-              content="2022-05-21">
-          05-21
-        </time>
-      </div>
+      <footer class="post-footer">
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/05/21/%E3%80%8Ccoc%EF%BC%9Alog%E3%80%8D%E5%BC%80%E7%AB%AFLog-ver-%E5%8F%8C%E5%8F%B6-32w-Shelter/" itemprop="url">
-            <span itemprop="name">「coc：log」开端Log_ver.双叶_32w_Shelter</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/23/%E3%80%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8D%E3%80%8A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%8824-%EF%BC%89/" rel="prev" title="「操作系统」《操作系统导论》笔记（24-）">
+      <i class="fa fa-chevron-left"></i> 「操作系统」《操作系统导论》笔记（24-）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -254,6 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#static"><span class="nav-number">1.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extern"><span class="nav-number">2.</span> <span class="nav-text">extern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%84%9A%E6%B3%A8"><span class="nav-number">3.</span> <span class="nav-text">脚注</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
